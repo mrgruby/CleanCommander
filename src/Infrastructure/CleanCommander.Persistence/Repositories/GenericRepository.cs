@@ -10,6 +10,12 @@ namespace CleanCommander.Persistence.Repositories
 {
     public abstract class GenericRepository<T> : IGenericRepository<T> where T : class
     {
+        private readonly CleanCommanderDbContext dbContext;
+
+        public GenericRepository(CleanCommanderDbContext dbContext)
+        {
+            this.dbContext = dbContext;
+        }
         public void Add(T entity)
         {
             throw new NotImplementedException();

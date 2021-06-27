@@ -10,7 +10,7 @@ namespace CleanCommander.Persistence.Repositories
 {
     public class PlatformRepository : GenericRepository<Platform>, IPlatformRepository
     {
-        public PlatformRepository()
+        public PlatformRepository(CleanCommanderDbContext dbContext) : base(dbContext)
         {
 
         }

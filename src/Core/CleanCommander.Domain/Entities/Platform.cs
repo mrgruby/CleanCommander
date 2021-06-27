@@ -8,5 +8,8 @@ namespace CleanCommander.Domain.Entities
 {
     public class Platform
     {
+        public int PlatformId { get; set; }
+        public string PlatformName { get; set; }
+        public virtual ICollection<Command> Commands { get; set; }
     }
 }

@@ -10,5 +10,9 @@ namespace CleanCommander.Persistence.Repositories
 {
     public class CommandRepository : GenericRepository<Command>, ICommandRepository
     {
+        public CommandRepository(CleanCommanderDbContext dbContext) : base(dbContext)
+        {
+
+        }
     }
 }
