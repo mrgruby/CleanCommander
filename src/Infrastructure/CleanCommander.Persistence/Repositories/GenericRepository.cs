@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CleanCommander.Persistence.Repositories
 {
-    public abstract class GenericRepository<T> : IGenericRepository<T> where T : class
+    public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
         private readonly CleanCommanderDbContext dbContext;
 

@@ -16,13 +16,4 @@
     <ProjectReference Include="..\CleanCommander.Domain\CleanCommander.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Features\Command\Commands\" />
-    <Folder Include="Features\Command\Queries\" />
-    <Folder Include="Features\Platform\Commands\" />
-    <Folder Include="Features\Platform\Queries\" />
-    <Folder Include="MappingProfiles\" />
-    <Folder Include="Responses\" />
-  </ItemGroup>
-
 </Project>
