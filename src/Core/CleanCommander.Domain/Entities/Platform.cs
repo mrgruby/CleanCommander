@@ -10,6 +10,6 @@ namespace CleanCommander.Domain.Entities
     {
         public Guid PlatformId { get; set; }
         public string PlatformName { get; set; }
-        public virtual ICollection<Command> Commands { get; set; }
+        public virtual ICollection<CommandLine> Commands { get; set; }
     }
 }

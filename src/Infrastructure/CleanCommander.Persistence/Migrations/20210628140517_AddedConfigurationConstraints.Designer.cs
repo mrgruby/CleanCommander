@@ -4,14 +4,16 @@ using CleanCommander.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CleanCommander.Persistence.Migrations
 {
     [DbContext(typeof(CleanCommanderDbContext))]
-    partial class CleanCommanderDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210628140517_AddedConfigurationConstraints")]
+    partial class AddedConfigurationConstraints
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -19,7 +21,7 @@ namespace CleanCommander.Persistence.Migrations
                 .HasAnnotation("ProductVersion", "5.0.7")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("CleanCommander.Domain.Entities.CommandLine", b =>
+            modelBuilder.Entity("CleanCommander.Domain.Entities.Command", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -48,7 +50,7 @@ namespace CleanCommander.Persistence.Migrations
 
                     b.HasIndex("PlatformId");
 
-                    b.ToTable("CommandLines");
+                    b.ToTable("Commands");
 
                     b.HasData(
                         new
@@ -167,7 +169,7 @@ namespace CleanCommander.Persistence.Migrations
                         });
                 });
 
-            modelBuilder.Entity("CleanCommander.Domain.Entities.CommandLine", b =>
+            modelBuilder.Entity("CleanCommander.Domain.Entities.Command", b =>
                 {
                     b.HasOne("CleanCommander.Domain.Entities.Platform", "Platform")
                         .WithMany("Commands")

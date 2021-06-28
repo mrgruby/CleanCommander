@@ -8,5 +8,12 @@ namespace CleanCommander.Application.Features.Command.Queries.GetCommandsList
 {
     public class CommandsListReturnModel
     {
+        public Guid Id { get; set; }
+        public string HowTo { get; set; }
+        public string Line { get; set; }
+        public string PlatformName { get; set; }
+        public string Comment { get; set; }
+        public Guid PlatformId { get; set; }
+        public GetCommandsListPlatformDto Platform { get; set; }
     }
 }

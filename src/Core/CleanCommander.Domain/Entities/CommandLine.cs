@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CleanCommander.Domain.Entities
 {
-    public class Command
+    public class CommandLine
     {
         public Guid Id { get; set; }
         public string HowTo { get; set; }

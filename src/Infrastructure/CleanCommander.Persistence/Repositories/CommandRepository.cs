@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CleanCommander.Persistence.Repositories
 {
-    public class CommandRepository : GenericRepository<Command>, ICommandRepository
+    public class CommandRepository : GenericRepository<CommandLine>, ICommandRepository
     {
         public CommandRepository(CleanCommanderDbContext dbContext) : base(dbContext)
         {

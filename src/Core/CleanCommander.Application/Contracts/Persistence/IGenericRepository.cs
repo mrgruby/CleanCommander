@@ -16,6 +16,5 @@ namespace CleanCommander.Application.Contracts.Persistence
         Task<IEnumerable<T>> All();
         Task<IEnumerable<T>> Find(Expression<Func<T, bool>> predicate);
         Task<IReadOnlyList<T>> GetPagedReponse(int page, int size);
-        Task SaveChanges();
     }
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CleanCommander.Application.Contracts.Persistence
 {
-    public interface ICommandRepository : IGenericRepository<Command>
+    public interface ICommandRepository : IGenericRepository<CommandLine>
     {
     }
 }

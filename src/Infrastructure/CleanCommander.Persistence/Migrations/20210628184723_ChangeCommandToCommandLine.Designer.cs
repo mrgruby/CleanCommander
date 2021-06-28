@@ -4,14 +4,16 @@ using CleanCommander.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CleanCommander.Persistence.Migrations
 {
     [DbContext(typeof(CleanCommanderDbContext))]
-    partial class CleanCommanderDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210628184723_ChangeCommandToCommandLine")]
+    partial class ChangeCommandToCommandLine
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -48,7 +50,7 @@ namespace CleanCommander.Persistence.Migrations
 
                     b.HasIndex("PlatformId");
 
-                    b.ToTable("CommandLines");
+                    b.ToTable("Commands");
 
                     b.HasData(
                         new
