@@ -11,5 +11,6 @@ namespace CleanCommander.Api.Controllers
     [ApiController]
     public class PlatformController : ControllerBase
     {
+        //api/platform/{id}/commandlines
     }
 }

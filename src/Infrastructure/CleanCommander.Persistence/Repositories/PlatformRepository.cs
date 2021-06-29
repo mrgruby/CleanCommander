@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CleanCommander.Persistence.Repositories
 {
-    public class PlatformRepository : GenericRepository<Platform>, IPlatformRepository
+    public class PlatformRepository : GenericRepository<PromptPlatform>, IPlatformRepository
     {
         public PlatformRepository(CleanCommanderDbContext dbContext) : base(dbContext)
         {

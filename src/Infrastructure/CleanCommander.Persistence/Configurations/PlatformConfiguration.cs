@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace CleanCommander.Persistence.Configurations
 {
-    public class PlatformConfiguration : IEntityTypeConfiguration<Platform>
+    public class PlatformConfiguration : IEntityTypeConfiguration<PromptPlatform>
     {
-        public void Configure(EntityTypeBuilder<Platform> builder)
+        public void Configure(EntityTypeBuilder<PromptPlatform> builder)
         {
             builder.Property(e => e.PlatformName)
             .IsRequired()

@@ -16,7 +16,7 @@ namespace CleanCommander.Persistence
         }
 
         public DbSet<CommandLine> CommandLines { get; set; }
-        public DbSet<Platform> Platforms { get; set; }
+        public DbSet<PromptPlatform> Platforms { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -27,17 +27,17 @@ namespace CleanCommander.Persistence
             var efGuid = Guid.Parse("{6313179F-7837-473A-A4D5-A5571B43E6A6}");
             var gitGuid = Guid.Parse("{BF3F3002-7E53-441E-8B76-F6280BE284AA}");
 
-            modelBuilder.Entity<Platform>().HasData(new Platform
+            modelBuilder.Entity<PromptPlatform>().HasData(new PromptPlatform
             {
                 PlatformName = "Angular CLI",
                 PlatformId = angularCliGuid 
             });
-            modelBuilder.Entity<Platform>().HasData(new Platform
+            modelBuilder.Entity<PromptPlatform>().HasData(new PromptPlatform
             {
                 PlatformName = "Entity Framework",
                 PlatformId = efGuid
             });
-            modelBuilder.Entity<Platform>().HasData(new Platform
+            modelBuilder.Entity<PromptPlatform>().HasData(new PromptPlatform
             {
                 PlatformName = "Git commands",
                 PlatformId = gitGuid

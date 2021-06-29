@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CleanCommander.Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/platform/{platformId}/commands")]
     [ApiController]
     public class CommandController : ControllerBase
     {

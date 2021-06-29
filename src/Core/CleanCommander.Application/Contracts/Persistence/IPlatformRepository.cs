@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CleanCommander.Application.Contracts.Persistence
 {
-    public interface IPlatformRepository : IGenericRepository<Platform>
+    public interface IPlatformRepository : IGenericRepository<PromptPlatform>
     {
     }
 }

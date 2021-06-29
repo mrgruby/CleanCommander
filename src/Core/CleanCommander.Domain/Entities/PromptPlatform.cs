@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CleanCommander.Domain.Entities
 {
-    public class Platform
+    public class PromptPlatform
     {
         public Guid PlatformId { get; set; }
         public string PlatformName { get; set; }

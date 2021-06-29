@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CleanCommander.Domain.Entities
+namespace CleanCommander.Application.Features.Platforms.Queries.GetPlatformsList
 {
-    public class CommandLine
+    public class GetPlatformsListCommandDto
     {
         public Guid Id { get; set; }
         public string HowTo { get; set; }
@@ -14,6 +14,5 @@ namespace CleanCommander.Domain.Entities
         public string PlatformName { get; set; }
         public string Comment { get; set; }
         public Guid PlatformId { get; set; }
-        public virtual PromptPlatform Platform { get; set; }
     }
 }
