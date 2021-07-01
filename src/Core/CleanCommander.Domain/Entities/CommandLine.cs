@@ -8,12 +8,12 @@ namespace CleanCommander.Domain.Entities
 {
     public class CommandLine
     {
-        public Guid Id { get; set; }
+        public Guid CommandLineId { get; set; }
         public string HowTo { get; set; }
         public string Line { get; set; }
-        public string PlatformName { get; set; }
+        public string PromptPlatformName { get; set; }
         public string Comment { get; set; }
-        public Guid PlatformId { get; set; }
+        public Guid PromptPlatformId { get; set; }
         public virtual PromptPlatform Platform { get; set; }
     }
 }

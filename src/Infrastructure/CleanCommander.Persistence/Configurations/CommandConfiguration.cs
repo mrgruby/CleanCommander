@@ -13,7 +13,7 @@ namespace CleanCommander.Persistence.Configurations
     {
         public void Configure(EntityTypeBuilder<CommandLine> builder)
         {
-            builder.Property(e => e.PlatformName)
+            builder.Property(e => e.PromptPlatformName)
                 .HasMaxLength(100)
                 .IsRequired();
 

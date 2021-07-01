@@ -8,8 +8,8 @@ namespace CleanCommander.Domain.Entities
 {
     public class PromptPlatform
     {
-        public Guid PlatformId { get; set; }
-        public string PlatformName { get; set; }
-        public virtual ICollection<CommandLine> Commands { get; set; }
+        public Guid PromptPlatformId { get; set; }
+        public string PromptPlatformName { get; set; }
+        public virtual ICollection<CommandLine> CommandLineList { get; set; }
     }
 }

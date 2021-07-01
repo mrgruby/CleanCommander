@@ -13,17 +13,18 @@ namespace CleanCommander.Application.Features.Platforms.Queries.GetPlatformsList
 {
     public class GetPlatformsListQueryHandler : IRequestHandler<GetPlatformsListQuery, List<GetPlatformsListReturnModel>>
     {
-        private readonly IGenericRepository<PromptPlatform> _repo;
+        private readonly IPlatformRepository _repo;
         private readonly IMapper _mapper;
 
-        public GetPlatformsListQueryHandler(IGenericRepository<PromptPlatform> repo, IMapper mapper)
+        public GetPlatformsListQueryHandler(IPlatformRepository repo, IMapper mapper)
         {
             _repo = repo;
             _mapper = mapper;
         }
-        public Task<List<GetPlatformsListReturnModel>> Handle(GetPlatformsListQuery request, CancellationToken cancellationToken)
+        public async Task<List<GetPlatformsListReturnModel>> Handle(GetPlatformsListQuery request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var platformsListFromDb = await _repo.GetPlatformsWithCommands();
+            return _mapper.Map<List<GetPlatformsListReturnModel>>(platformsListFromDb);
         }
     }
 }

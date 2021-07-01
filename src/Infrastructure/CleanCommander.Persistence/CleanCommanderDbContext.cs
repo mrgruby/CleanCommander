@@ -16,7 +16,7 @@ namespace CleanCommander.Persistence
         }
 
         public DbSet<CommandLine> CommandLines { get; set; }
-        public DbSet<PromptPlatform> Platforms { get; set; }
+        public DbSet<PromptPlatform> PromptPlatforms { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -29,108 +29,108 @@ namespace CleanCommander.Persistence
 
             modelBuilder.Entity<PromptPlatform>().HasData(new PromptPlatform
             {
-                PlatformName = "Angular CLI",
-                PlatformId = angularCliGuid 
+                PromptPlatformName = "Angular CLI",
+                PromptPlatformId = angularCliGuid 
             });
             modelBuilder.Entity<PromptPlatform>().HasData(new PromptPlatform
             {
-                PlatformName = "Entity Framework",
-                PlatformId = efGuid
+                PromptPlatformName = "Entity Framework",
+                PromptPlatformId = efGuid
             });
             modelBuilder.Entity<PromptPlatform>().HasData(new PromptPlatform
             {
-                PlatformName = "Git commands",
-                PlatformId = gitGuid
+                PromptPlatformName = "Git commands",
+                PromptPlatformId = gitGuid
             });
 
             modelBuilder.Entity<CommandLine>().HasData(new CommandLine
             {
-                Id = Guid.Parse("{EE272F8B-6096-4CB6-8625-BB4BB2D89E8B}"), 
-                PlatformName = "Angular CLI", 
+                CommandLineId = Guid.Parse("{EE272F8B-6096-4CB6-8625-BB4BB2D89E8B}"), 
+                PromptPlatformName = "Angular CLI", 
                 HowTo = "Generate new module", 
                 Line = "This is the command", 
                 Comment = "This is a comment", 
-                PlatformId = angularCliGuid
+                PromptPlatformId = angularCliGuid
             });
 
             modelBuilder.Entity<CommandLine>().HasData(new CommandLine
             {
-                Id = Guid.Parse("{3448D5A4-0F72-4DD7-BF15-C14A46B26C00}"),
-                PlatformName = "Angular CLI",
+                CommandLineId = Guid.Parse("{3448D5A4-0F72-4DD7-BF15-C14A46B26C00}"),
+                PromptPlatformName = "Angular CLI",
                 HowTo = "Generate new component",
                 Line = "This is the command",
                 Comment = "This is a comment",
-                PlatformId = angularCliGuid
+                PromptPlatformId = angularCliGuid
             });
 
             modelBuilder.Entity<CommandLine>().HasData(new CommandLine
             {
-                Id = Guid.Parse("{B419A7CA-3321-4F38-BE8E-4D7B6A529319}"),
-                PlatformName = "Angular CLI",
+                CommandLineId = Guid.Parse("{B419A7CA-3321-4F38-BE8E-4D7B6A529319}"),
+                PromptPlatformName = "Angular CLI",
                 HowTo = "Generate new Service",
                 Line = "This is the command",
                 Comment = "This is a comment",
-                PlatformId = angularCliGuid
+                PromptPlatformId = angularCliGuid
             });
 
             modelBuilder.Entity<CommandLine>().HasData(new CommandLine
             {
-                Id = Guid.Parse("{62787623-4C52-43FE-B0C9-B7044FB5929B}"),
-                PlatformName = "Entity Framework",
+                CommandLineId = Guid.Parse("{62787623-4C52-43FE-B0C9-B7044FB5929B}"),
+                PromptPlatformName = "Entity Framework",
                 HowTo = "Add new migratation",
                 Line = "This is the command",
                 Comment = "This is a comment",
-                PlatformId = efGuid
+                PromptPlatformId = efGuid
             });
 
             modelBuilder.Entity<CommandLine>().HasData(new CommandLine
             {
-                Id = Guid.Parse("{1BABD057-E980-4CB3-9CD2-7FDD9E525668}"),
-                PlatformName = "Entity Framework",
+                CommandLineId = Guid.Parse("{1BABD057-E980-4CB3-9CD2-7FDD9E525668}"),
+                PromptPlatformName = "Entity Framework",
                 HowTo = "Update database",
                 Line = "This is the command",
                 Comment = "This is a comment",
-                PlatformId = efGuid
+                PromptPlatformId = efGuid
             });
 
             modelBuilder.Entity<CommandLine>().HasData(new CommandLine
             {
-                Id = Guid.Parse("{ADC42C09-08C1-4D2C-9F96-2D15BB1AF299}"),
-                PlatformName = "Entity Framework",
+                CommandLineId = Guid.Parse("{ADC42C09-08C1-4D2C-9F96-2D15BB1AF299}"),
+                PromptPlatformName = "Entity Framework",
                 HowTo = "Update packages",
                 Line = "This is the command",
                 Comment = "This is a comment",
-                PlatformId = efGuid
+                PromptPlatformId = efGuid
             });
 
             modelBuilder.Entity<CommandLine>().HasData(new CommandLine
             {
-                Id = Guid.Parse("{7E94BC5B-71A5-4C8C-BC3B-71BB7976237E}"),
-                PlatformName = "Git commands",
+                CommandLineId = Guid.Parse("{7E94BC5B-71A5-4C8C-BC3B-71BB7976237E}"),
+                PromptPlatformName = "Git commands",
                 HowTo = "Push code",
                 Line = "This is the command",
                 Comment = "This is a comment",
-                PlatformId = gitGuid
+                PromptPlatformId = gitGuid
             });
 
             modelBuilder.Entity<CommandLine>().HasData(new CommandLine
             {
-                Id = Guid.Parse("{86D3A045-B42D-4854-8150-D6A374948B6E}"),
-                PlatformName = "Git commands",
+                CommandLineId = Guid.Parse("{86D3A045-B42D-4854-8150-D6A374948B6E}"),
+                PromptPlatformName = "Git commands",
                 HowTo = "Change branch",
                 Line = "This is the command",
                 Comment = "This is a comment",
-                PlatformId = gitGuid
+                PromptPlatformId = gitGuid
             });
 
             modelBuilder.Entity<CommandLine>().HasData(new CommandLine
             {
-                Id = Guid.Parse("{771CCA4B-066C-4AC7-B3DF-4D12837FE7E0}"),
-                PlatformName = "Git commands",
+                CommandLineId = Guid.Parse("{771CCA4B-066C-4AC7-B3DF-4D12837FE7E0}"),
+                PromptPlatformName = "Git commands",
                 HowTo = "Add new repository",
                 Line = "This is the command",
                 Comment = "This is a comment",
-                PlatformId = gitGuid
+                PromptPlatformId = gitGuid
             });
         }
         }

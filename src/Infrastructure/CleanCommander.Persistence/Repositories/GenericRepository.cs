@@ -11,7 +11,7 @@ namespace CleanCommander.Persistence.Repositories
 {
     public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
-        private readonly CleanCommanderDbContext _dbContext;
+        protected readonly CleanCommanderDbContext _dbContext;
 
         public GenericRepository(CleanCommanderDbContext dbContext)
         {

@@ -9,5 +9,6 @@ namespace CleanCommander.Application.Contracts.Persistence
 {
     public interface IPlatformRepository : IGenericRepository<PromptPlatform>
     {
+        Task<IEnumerable<PromptPlatform>> GetPlatformsWithCommands();
     }
 }

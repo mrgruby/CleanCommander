@@ -8,8 +8,8 @@ namespace CleanCommander.Application.Features.Platforms.Queries.GetPlatformsList
 {
     public class GetPlatformsListReturnModel
     {
-        public Guid PlatformId { get; set; }
-        public string PlatformName { get; set; }
-        public virtual ICollection<GetPlatformsListCommandDto> CommandLines { get; set; }
+        public Guid PromptPlatformId { get; set; }
+        public string PromptPlatformName { get; set; }
+        public ICollection<GetPlatformsListCommandDto> CommandLineList { get; set; }
     }
 }
