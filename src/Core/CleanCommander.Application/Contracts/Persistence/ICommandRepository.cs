@@ -1,4 +1,5 @@
-﻿using CleanCommander.Domain.Entities;
+﻿using CleanCommander.Application.Features.Command.Queries.GetCommandsList;
+using CleanCommander.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,5 +10,6 @@ namespace CleanCommander.Application.Contracts.Persistence
 {
     public interface ICommandRepository : IGenericRepository<CommandLine>
     {
+        Task<IEnumerable<CommandLine>>GetCommandLineListByPlatform(Guid platformId);
     }
 }

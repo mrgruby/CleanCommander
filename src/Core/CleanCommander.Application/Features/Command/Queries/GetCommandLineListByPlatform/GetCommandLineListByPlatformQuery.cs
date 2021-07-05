@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 
 namespace CleanCommander.Application.Features.Command.Queries.GetCommandsList
 {
-    public class GetCommandsListQuery : IRequest<List<CommandsListReturnModel>>
+    public class GetCommandLineListByPlatformQuery : IRequest<List<GetCommandLineListByPlatformReturnModel>>
     {
+        public Guid PlatformId { get; set; }
     }
 }

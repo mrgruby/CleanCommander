@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CleanCommander.Application.Features.Command.Queries.GetCommandsList
 {
-    public class CommandsListReturnModel
+    public class GetCommandLineListPlatformDto
     {
         public Guid Id { get; set; }
         public string HowTo { get; set; }
@@ -14,6 +14,5 @@ namespace CleanCommander.Application.Features.Command.Queries.GetCommandsList
         public string PlatformName { get; set; }
         public string Comment { get; set; }
         public Guid PlatformId { get; set; }
-        public GetCommandsListPlatformDto Platform { get; set; }
     }
 }
