@@ -11,5 +11,6 @@ namespace CleanCommander.Application.Contracts.Persistence
     public interface ICommandRepository : IGenericRepository<CommandLine>
     {
         Task<IEnumerable<CommandLine>>GetCommandLineListByPlatform(Guid platformId);
+        Task<CommandLine> GetCommandLineByPlatform(Guid platformId, Guid commandLineId);
     }
 }

@@ -9,6 +9,7 @@ namespace CleanCommander.Application.Features.Command.Queries.GetCommandDetail
 {
     public class GetCommandDetailQuery : IRequest<CommandDetailsReturnModel>
     {
-        public Guid CommandId { get; set; }
+        public Guid PlatformId { get; set; }
+        public Guid CommandLineId { get; set; }
     }
 }

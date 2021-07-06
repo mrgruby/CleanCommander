@@ -17,6 +17,11 @@ namespace CleanCommander.Persistence.Repositories
 
         }
 
+        public async Task<CommandLine> GetCommandLineByPlatform(Guid platformId, Guid commandLineId)
+        {
+            return await _dbContext.CommandLines.Where(x => x.PromptPlatformId == platformId && x.CommandLineId == commandLineId).FirstOrDefaultAsync();
+        }
+
         public async Task<IEnumerable<CommandLine>> GetCommandLineListByPlatform(Guid platformId)
         {
             return await _dbContext.CommandLines.Where(x => x.PromptPlatformId == platformId).ToListAsync();

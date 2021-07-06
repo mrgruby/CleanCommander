@@ -1,4 +1,5 @@
-﻿using CleanCommander.Application.Features.Command.Queries.GetCommandsList;
+﻿using CleanCommander.Application.Features.Command.Queries.GetCommandDetail;
+using CleanCommander.Application.Features.Command.Queries.GetCommandsList;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -26,10 +27,18 @@ namespace CleanCommander.Api.Controllers
 
         //https://localhost:44363/api/platform/6313179F-7837-473A-A4D5-A5571B43E6A6/command/
         [HttpGet(Name = "GetCommandsLinesByPlatform")]
-        public async Task<ActionResult<GetCommandLineListByPlatformReturnModel>> Get(Guid platformId)
+        public async Task<ActionResult<List<GetCommandLineListByPlatformReturnModel>>> Get(Guid platformId)
         {
             var getCommandLineListByPlatformReturnModel = await _mediator.Send(new GetCommandLineListByPlatformQuery { PlatformId = platformId });
             return Ok(getCommandLineListByPlatformReturnModel);
+        }
+
+        //https://localhost:44363/api/platform/6313179F-7837-473A-A4D5-A5571B43E6A6/command/adc42c09-08c1-4d2c-9f96-2d15bb1af299
+        [HttpGet("{commandLineId:Guid}", Name = "GetCommandLineByPlatform")]
+        public async Task<ActionResult<CommandDetailsReturnModel>> Get(Guid platformId, Guid commandLineId)
+        {
+            var getCommandLineByPlatformReturnModel = await _mediator.Send(new GetCommandDetailQuery { PlatformId = platformId, CommandLineId = commandLineId });
+            return Ok(getCommandLineByPlatformReturnModel);
         }
     }
 }
