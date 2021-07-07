@@ -25,6 +25,7 @@ namespace CleanCommander.Api.Controllers
             _mediator = mediator;
         }
 
+        //api/platform/{platformId}/command
         //https://localhost:44363/api/platform/6313179F-7837-473A-A4D5-A5571B43E6A6/command/
         [HttpGet(Name = "GetCommandsLinesByPlatform")]
         public async Task<ActionResult<List<GetCommandLineListByPlatformReturnModel>>> Get(Guid platformId)
@@ -33,6 +34,7 @@ namespace CleanCommander.Api.Controllers
             return Ok(getCommandLineListByPlatformReturnModel);
         }
 
+        //api/platform/{platformId}/command/{commandLineId}
         //https://localhost:44363/api/platform/6313179F-7837-473A-A4D5-A5571B43E6A6/command/adc42c09-08c1-4d2c-9f96-2d15bb1af299
         [HttpGet("{commandLineId:Guid}", Name = "GetCommandLineByPlatform")]
         public async Task<ActionResult<CommandDetailsReturnModel>> Get(Guid platformId, Guid commandLineId)
