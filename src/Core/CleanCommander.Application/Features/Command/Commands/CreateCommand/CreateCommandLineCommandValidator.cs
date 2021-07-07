@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CleanCommander.Application.Features.Command.Commands.CreateCommand
 {
-    public class CreateCommandCommand
+    public class CreateCommandLineCommandValidator
     {
     }
 }
