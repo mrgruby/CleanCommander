@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using CleanCommander.Application.Features.Command.Commands.CreateCommand;
 using CleanCommander.Application.Features.Command.Queries.GetCommandDetail;
 using CleanCommander.Application.Features.Command.Queries.GetCommandsList;
 using CleanCommander.Application.Features.Platforms.Queries.GetPlatformsList;
@@ -19,7 +20,8 @@ namespace CleanCommander.Application.MappingProfiles
             CreateMap<PromptPlatform, GetPlatformsListReturnModel>().ReverseMap();
             CreateMap<CommandLine, GetPlatformsListCommandDto>().ReverseMap();
             CreateMap<CommandLine, CommandDetailsReturnModel>().ReverseMap();
-
+            CreateMap<CommandLine, CreateCommandLineDto>().ReverseMap();
+            CreateMap<CommandLine, CreateCommandLineCommand>().ReverseMap();
         }
     }
 }

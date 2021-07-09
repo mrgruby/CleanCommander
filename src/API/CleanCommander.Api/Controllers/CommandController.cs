@@ -1,4 +1,6 @@
-﻿using CleanCommander.Application.Features.Command.Queries.GetCommandDetail;
+﻿using AutoMapper;
+using CleanCommander.Application.Features.Command.Commands.CreateCommand;
+using CleanCommander.Application.Features.Command.Queries.GetCommandDetail;
 using CleanCommander.Application.Features.Command.Queries.GetCommandsList;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -19,10 +21,12 @@ namespace CleanCommander.Api.Controllers
     public class CommandController : ControllerBase
     {
         private readonly IMediator _mediator;
+        private readonly IMapper _mapper;
 
-        public CommandController(IMediator mediator)
+        public CommandController(IMediator mediator, IMapper mapper)
         {
             _mediator = mediator;
+            _mapper = mapper;
         }
 
         //api/platform/{platformId}/command
@@ -41,6 +45,14 @@ namespace CleanCommander.Api.Controllers
         {
             var getCommandLineByPlatformReturnModel = await _mediator.Send(new GetCommandDetailQuery { PlatformId = platformId, CommandLineId = commandLineId });
             return Ok(getCommandLineByPlatformReturnModel);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<CreateCommandLineCommandResponse>>Post(Guid platformId, CreateCommandLineCommand commandLine)
+        {
+            var retunModel = await _mediator.Send(commandLine);
+
+            return CreatedAtRoute("GetCommandLineByPlatform", new { platformId = platformId, commandLineId = retunModel.CommandLineDto.CommandLineId }, retunModel.CommandLineDto);
         }
     }
 }
