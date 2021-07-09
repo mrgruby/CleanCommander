@@ -47,12 +47,26 @@ namespace CleanCommander.Api.Controllers
             return Ok(getCommandLineByPlatformReturnModel);
         }
 
+        /// <summary>
+        /// Add a new command line
+        /// </summary>
+        /// <param name="platformId">Id of the platform on which to add the new command line</param>
+        /// <param name="commandLine">The model object that is posted from the user/UI</param>
+        /// <returns>The newly created ressource, along with a link to it.</returns>
+        /// api/platform/{platformId}/command
         [HttpPost]
-        public async Task<ActionResult<CreateCommandLineCommandResponse>>Post(Guid platformId, CreateCommandLineCommand commandLine)
+        public async Task<ActionResult<CreateCommandLineCommandResponse>> Post(Guid platformId, CreateCommandLineCommand commandLine)
         {
             var retunModel = await _mediator.Send(commandLine);
 
-            return CreatedAtRoute("GetCommandLineByPlatform", new { platformId = platformId, commandLineId = retunModel.CommandLineDto.CommandLineId }, retunModel.CommandLineDto);
+            if (retunModel.Success)
+                //Return the newly created ressource, along with a link to it.
+                return CreatedAtRoute("GetCommandLineByPlatform", new { platformId = platformId, commandLineId = retunModel.CommandLineDto.CommandLineId }, retunModel.CommandLineDto);
+            else
+                return BadRequest($"Failed to save new CommandLine - {string.Join(", ", retunModel.ValidationErrors)}");
         }
+
+        [HttpPatch]
+        public async Task<ActionResult<>>
     }
 }

@@ -7,9 +7,11 @@ using System.Threading.Tasks;
 
 namespace CleanCommander.Application.Features.Command.Commands.CreateCommand
 {
+    /// <summary>
+    /// This is the request model, which is sent in the create request from the controller.
+    /// </summary>
     public class CreateCommandLineCommand : IRequest<CreateCommandLineCommandResponse>
     {
-        public Guid CommandLineId { get; set; }
         public string HowTo { get; set; }
         public string Line { get; set; }
         public string PromptPlatformName { get; set; }

@@ -29,8 +29,8 @@ namespace CleanCommander.Application.Features.Command.Commands.CreateCommand
             var response = new CreateCommandLineCommandResponse();
             var validator = new CreateCommandLineCommandValidator();
 
-            //If any of the validation rules, set up for the CreateCommandLineCommand class inside the CreateEventCommandValidator, are broken,
-            //the validationResult will contain a list of these broken rules. 
+            //Check the request to see if any of the validation rules, set up for the CreateCommandLineCommand class inside the CreateEventCommandValidator, are broken.
+            //If so, add the error message to the ValidationErrors list in the validationResult.
             var validationResult = await validator.ValidateAsync(request);
 
             if (validationResult.Errors.Count > 0)
@@ -44,9 +44,13 @@ namespace CleanCommander.Application.Features.Command.Commands.CreateCommand
             }
             if (response.Success)
             {
+                //Map from the CommandLine request model to a CommandLine Entity, in order to add it to the database.
                 var commandLine = _mapper.Map<CommandLine>(request);
 
+                //Add to database. SaveChanges is called in the Add method.
                 _repo.Add(commandLine);
+
+                //Map from the CommandLine Entity to a CreateCommandLineDto, which is added to the response return model.
                 response.CommandLineDto = _mapper.Map<CreateCommandLineDto>(commandLine);
             }
             return response;
