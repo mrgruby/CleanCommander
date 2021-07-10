@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
 using CleanCommander.Application.Features.Command.Commands.CreateCommand;
+using CleanCommander.Application.Features.Command.Commands.UpdateCommand;
 using CleanCommander.Application.Features.Command.Queries.GetCommandDetail;
 using CleanCommander.Application.Features.Command.Queries.GetCommandsList;
 using MediatR;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -66,7 +68,21 @@ namespace CleanCommander.Api.Controllers
                 return BadRequest($"Failed to save new CommandLine - {string.Join(", ", retunModel.ValidationErrors)}");
         }
 
-        [HttpPatch]
-        public async Task<ActionResult<>>
+        //https://localhost:44363/api/platform/6313179F-7837-473A-A4D5-A5571B43E6A6/command/adc42c09-08c1-4d2c-9f96-2d15bb1af299
+        [HttpPatch("{commandLineId:Guid}")]
+        public async Task<ActionResult>Patch([FromBody] JsonPatchDocument<UpdateCommandLineDto> commmandLineToUpdate, Guid platformId, Guid commandLineId)
+        {
+            var patchCommand = new UpdateCommandCommand
+            {
+                CommmandLineToUpdatePatch = commmandLineToUpdate,
+                CommandLineId = commandLineId,
+                PromptPlatformId = platformId
+            };
+
+            var response = await _mediator.Send(patchCommand);
+
+            return NoContent();
+
+        }
     }
 }
