@@ -6,11 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CleanCommander.Application.Features.Command.Commands.UpdateCommand
+namespace CleanCommander.Application.Features.Command.Commands.PatchCommandLine
 {
-    public class UpdateCommandCommand : IRequest
+    public class PatchCommandLineCommand : IRequest
     {
-        public JsonPatchDocument<UpdateCommandLineDto> CommmandLineToUpdatePatch { get; set; }
+        public JsonPatchDocument<PatchCommandLineDto> CommmandLineToUpdatePatch { get; set; }
         public Guid CommandLineId { get; set; }
         public Guid PromptPlatformId { get; set; }
     }

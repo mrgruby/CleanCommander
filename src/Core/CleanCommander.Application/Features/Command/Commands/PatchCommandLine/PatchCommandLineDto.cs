@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CleanCommander.Application.Features.Command.Commands.UpdateCommand
+namespace CleanCommander.Application.Features.Command.Commands.PatchCommandLine
 {
-    public class UpdateCommandLineDto
+    public class PatchCommandLineDto
     {
         public string HowTo { get; set; }
         public string Line { get; set; }

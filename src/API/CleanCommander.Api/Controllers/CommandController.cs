@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using CleanCommander.Application.Features.Command.Commands.CreateCommand;
-using CleanCommander.Application.Features.Command.Commands.UpdateCommand;
+using CleanCommander.Application.Features.Command.Commands.DeleteCommand;
+using CleanCommander.Application.Features.Command.Commands.PatchCommandLine;
 using CleanCommander.Application.Features.Command.Queries.GetCommandDetail;
 using CleanCommander.Application.Features.Command.Queries.GetCommandsList;
 using MediatR;
@@ -68,11 +69,18 @@ namespace CleanCommander.Api.Controllers
                 return BadRequest($"Failed to save new CommandLine - {string.Join(", ", retunModel.ValidationErrors)}");
         }
 
+        /// <summary>
+        /// The request contains a JsonPatchDocument, with the changes written in a special JSON format. Check the note.txt in the controllers folder.
+        /// </summary>
+        /// <param name="commmandLineToUpdate">JsonPatchDocument, with the changes written in a special JSON format</param>
+        /// <param name="platformId">Id of the platform to which the commandline is related</param>
+        /// <param name="commandLineId">Id of the commandline to update</param>
+        /// <returns></returns>
         //https://localhost:44363/api/platform/6313179F-7837-473A-A4D5-A5571B43E6A6/command/adc42c09-08c1-4d2c-9f96-2d15bb1af299
         [HttpPatch("{commandLineId:Guid}")]
-        public async Task<ActionResult>Patch([FromBody] JsonPatchDocument<UpdateCommandLineDto> commmandLineToUpdate, Guid platformId, Guid commandLineId)
+        public async Task<ActionResult>Patch([FromBody] JsonPatchDocument<PatchCommandLineDto> commmandLineToUpdate, Guid platformId, Guid commandLineId)
         {
-            var patchCommand = new UpdateCommandCommand
+            var patchCommand = new PatchCommandLineCommand
             {
                 CommmandLineToUpdatePatch = commmandLineToUpdate,
                 CommandLineId = commandLineId,
@@ -83,6 +91,18 @@ namespace CleanCommander.Api.Controllers
 
             return NoContent();
 
+        }
+
+        //https://localhost:44363/api/platform/6313179F-7837-473A-A4D5-A5571B43E6A6/command/adc42c09-08c1-4d2c-9f96-2d15bb1af299
+        [HttpDelete("{commandLineId:Guid}")]
+        public async Task<ActionResult<DeleteCommandLineCommandResponse>>Delete(Guid platformId, Guid commandLineId)
+        {
+            var response = await _mediator.Send(new DeleteCommandCommand { PromptPlatformId = platformId, CommandLineId = commandLineId });
+
+            if (response.Success == false && response.Message == "NotFound")
+                return NotFound($"CommandLine with Id {commandLineId} not found!");
+
+            return NoContent();
         }
     }
 }

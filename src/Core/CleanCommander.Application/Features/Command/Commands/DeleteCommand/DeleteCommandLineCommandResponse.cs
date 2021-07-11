@@ -1,4 +1,4 @@
-﻿using MediatR;
+﻿using CleanCommander.Application.Responses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,9 +7,11 @@ using System.Threading.Tasks;
 
 namespace CleanCommander.Application.Features.Command.Commands.DeleteCommand
 {
-    public class DeleteCommandCommand : IRequest<DeleteCommandLineCommandResponse>
+    public class DeleteCommandLineCommandResponse : BaseResponse
     {
-        public Guid CommandLineId { get; set; }
-        public Guid PromptPlatformId { get; set; }
+        public DeleteCommandLineCommandResponse() : base()
+        {
+
+        }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using CleanCommander.Application.Features.Command.Commands.CreateCommand;
-using CleanCommander.Application.Features.Command.Commands.UpdateCommand;
+using CleanCommander.Application.Features.Command.Commands.PatchCommandLine;
 using CleanCommander.Application.Features.Command.Queries.GetCommandDetail;
 using CleanCommander.Application.Features.Command.Queries.GetCommandsList;
 using CleanCommander.Application.Features.Platforms.Queries.GetPlatformsList;
@@ -23,7 +23,7 @@ namespace CleanCommander.Application.MappingProfiles
             CreateMap<CommandLine, CommandDetailsReturnModel>().ReverseMap();
             CreateMap<CommandLine, CreateCommandLineDto>().ReverseMap();
             CreateMap<CommandLine, CreateCommandLineCommand>().ReverseMap();
-            CreateMap<CommandLine, UpdateCommandLineDto>().ReverseMap();
+            CreateMap<CommandLine, PatchCommandLineDto>().ReverseMap();
         }
     }
 }

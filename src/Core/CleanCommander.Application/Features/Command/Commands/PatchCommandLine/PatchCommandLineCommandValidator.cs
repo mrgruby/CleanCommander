@@ -5,11 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CleanCommander.Application.Features.Command.Commands.UpdateCommand
+namespace CleanCommander.Application.Features.Command.Commands.PatchCommandLine
 {
-    public class UpdateCommandCommandValidator : AbstractValidator<UpdateCommandLineDto>
+    public class PatchCommandLineCommandValidator : AbstractValidator<PatchCommandLineDto>
     {
-        public UpdateCommandCommandValidator()
+        public PatchCommandLineCommandValidator()
         {
             RuleFor(p => p.HowTo)
                 .NotEmpty().WithMessage("{PropertyName} is required.")
