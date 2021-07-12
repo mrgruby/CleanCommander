@@ -1,4 +1,5 @@
-﻿using CleanCommander.Application.Responses;
+﻿using CleanCommander.Application.Features.Platforms.Commands.CreatePlatform;
+using CleanCommander.Application.Responses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,5 +14,7 @@ namespace CleanCommander.Application.Features.Platform.Commands.CreatePlatform
         {
 
         }
+
+        public CreatePlatformCommandDto CreatePlatformCommandDto { get; set; }
     }
 }

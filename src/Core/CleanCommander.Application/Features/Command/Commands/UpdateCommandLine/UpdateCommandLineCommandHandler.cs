@@ -20,18 +20,40 @@ namespace CleanCommander.Application.Features.Command.Commands.UpdateCommandLine
             _repo = repo;
             _mapper = mapper;
         }
-        public Task<UpdateCommandLineCommandResponse> Handle(UpdateCommandLineCommand request, CancellationToken cancellationToken)
+        public async Task<UpdateCommandLineCommandResponse> Handle(UpdateCommandLineCommand request, CancellationToken cancellationToken)
         {
             var response = new UpdateCommandLineCommandResponse();
-            var commandLineFromDbToUpdate = _repo.GetCommandLineByPlatform(request.PromptPlatformId, request.CommandLineId);
+            var validator = new UpdateCommandLineCommandValidator();
+
+            var commandLineFromDbToUpdate = await _repo.GetCommandLineByPlatform(request.PromptPlatformId, request.CommandLineId);
 
             if (commandLineFromDbToUpdate == null)
             {
                 response.Success = false;
                 response.Message = "Notfound";
+                return response;
             }
 
-            var 
+            //Check the request to see if any of the validation rules, set up for the CreateCommandLineCommand class inside the CreateEventCommandValidator, are broken.
+            //If so, add the error message to the ValidationErrors list in the validationResult.
+            var validationResult = await validator.ValidateAsync(request);
+
+            if (validationResult.Errors.Count > 0)
+            {
+                response.Success = false;
+                response.ValidationErrors = new List<string>();
+                foreach (var error in validationResult.Errors)
+                {
+                    response.ValidationErrors.Add(error.ErrorMessage);
+                }
+            }
+            if (response.Success)
+            {
+                _mapper.Map(request, commandLineFromDbToUpdate);
+
+                _repo.Update(commandLineFromDbToUpdate);
+            }
+            return response;
         }
     }
 }
