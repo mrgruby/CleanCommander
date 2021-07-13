@@ -1,4 +1,4 @@
-﻿using MediatR;
+﻿using CleanCommander.Application.Responses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,8 +7,11 @@ using System.Threading.Tasks;
 
 namespace CleanCommander.Application.Features.Platforms.Commands.DeletePlatform
 {
-    public class DeletePlatformCommand : IRequest<DeletePlatformResponse>
+    public class DeletePlatformResponse : BaseResponse
     {
-        public Guid PromptPlatformId { get; set; }
+        public DeletePlatformResponse() : base()
+        {
+
+        }
     }
 }

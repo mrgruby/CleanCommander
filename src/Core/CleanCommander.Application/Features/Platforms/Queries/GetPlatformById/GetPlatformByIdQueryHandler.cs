@@ -21,9 +21,10 @@ namespace CleanCommander.Application.Features.Platforms.Queries.GetPlatformById
             _mapper = mapper;
         }
 
-        public Task<GetPlatformByIdQueryReturnModel> Handle(GetPlatformByIdQuery request, CancellationToken cancellationToken)
+        public async Task<GetPlatformByIdQueryReturnModel> Handle(GetPlatformByIdQuery request, CancellationToken cancellationToken)
         {
-            var platformFormDb = _repo.Get(request.PromptPlatformId);
+            var platformFormDb = await _repo.Get(request.PromptPlatformId);
+            return _mapper.Map<GetPlatformByIdQueryReturnModel>(platformFormDb);
         }
     }
 }

@@ -4,6 +4,11 @@ using CleanCommander.Application.Features.Command.Commands.PatchCommandLine;
 using CleanCommander.Application.Features.Command.Commands.UpdateCommandLine;
 using CleanCommander.Application.Features.Command.Queries.GetCommandDetail;
 using CleanCommander.Application.Features.Command.Queries.GetCommandsList;
+using CleanCommander.Application.Features.Platform.Commands.CreatePlatform;
+using CleanCommander.Application.Features.Platforms.Commands.CreatePlatform;
+using CleanCommander.Application.Features.Platforms.Commands.DeletePlatform;
+using CleanCommander.Application.Features.Platforms.Commands.UpdatePlatform;
+using CleanCommander.Application.Features.Platforms.Queries.GetPlatformById;
 using CleanCommander.Application.Features.Platforms.Queries.GetPlatformsList;
 using CleanCommander.Domain.Entities;
 using System;
@@ -26,6 +31,11 @@ namespace CleanCommander.Application.MappingProfiles
             CreateMap<CommandLine, CreateCommandLineCommand>().ReverseMap();
             CreateMap<CommandLine, PatchCommandLineDto>().ReverseMap();
             CreateMap<CommandLine, UpdateCommandLineCommand>().ReverseMap();
+            CreateMap<PromptPlatform, GetPlatformByIdQueryReturnModel>().ReverseMap();
+            CreateMap<PromptPlatform, UpdatePlatformCommand>().ReverseMap();
+            CreateMap<PromptPlatform, CreatePlatformCommand>().ReverseMap();
+            CreateMap<PromptPlatform, DeletePlatformCommand>().ReverseMap();
+            CreateMap<PromptPlatform, CreatePlatformCommandDto>().ReverseMap();
         }
     }
 }

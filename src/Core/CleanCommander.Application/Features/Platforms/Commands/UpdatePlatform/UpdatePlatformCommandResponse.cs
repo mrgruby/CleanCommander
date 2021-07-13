@@ -1,4 +1,4 @@
-﻿using MediatR;
+﻿using CleanCommander.Application.Responses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,9 +7,11 @@ using System.Threading.Tasks;
 
 namespace CleanCommander.Application.Features.Platforms.Commands.UpdatePlatform
 {
-    public class UpdatePlatformCommand : IRequest<UpdatePlatformCommandResponse>
+    public class UpdatePlatformCommandResponse : BaseResponse
     {
-        public Guid PromptPlatformId { get; set; }
-        public string PromptPlatformName { get; set; }
+        public UpdatePlatformCommandResponse() : base()
+        {
+
+        }
     }
 }
