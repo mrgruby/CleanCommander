@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using CleanCommander.Application.Models;
+using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CleanCommander.Application.Features.Command.Commands.CreateCommand
 {
-    public class CreateCommandLineCommandValidator : AbstractValidator<CreateCommandLineCommand>
+    public class CreateCommandLineCommandValidator : AbstractValidator<CommandLineModel>
     {
         public CreateCommandLineCommandValidator()
         {

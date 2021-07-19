@@ -5,6 +5,7 @@ using CleanCommander.Application.Features.Command.Commands.PatchCommandLine;
 using CleanCommander.Application.Features.Command.Commands.UpdateCommandLine;
 using CleanCommander.Application.Features.Command.Queries.GetCommandDetail;
 using CleanCommander.Application.Features.Command.Queries.GetCommandsList;
+using CleanCommander.Application.Models;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.JsonPatch;
@@ -59,9 +60,10 @@ namespace CleanCommander.Api.Controllers
         /// <returns>The newly created ressource, along with a link to it.</returns>
         /// api/platform/{platformId}/command
         [HttpPost]
-        public async Task<ActionResult<CreateCommandLineCommandResponse>> Post(Guid platformId, CreateCommandLineCommand commandLine)
+        public async Task<ActionResult<CreateCommandLineCommandResponse>> Post(Guid platformId, CommandLineModel commandLineToAdd)
         {
-            var retunModel = await _mediator.Send(commandLine);
+            var command = new CreateCommandLineCommand { CommandLineModel = commandLineToAdd };
+            var retunModel = await _mediator.Send(command);
 
             if (retunModel.Success)
                 //Return the newly created ressource, along with a link to it.
@@ -104,9 +106,11 @@ namespace CleanCommander.Api.Controllers
         /// <returns></returns>
         //https://localhost:44363/api/platform/6313179F-7837-473A-A4D5-A5571B43E6A6/command/adc42c09-08c1-4d2c-9f96-2d15bb1af299
         [HttpPut("{commandLineId:Guid}")]
-        public async Task<ActionResult<UpdateCommandLineCommandResponse>> Put(UpdateCommandLineCommand commandLineToUpdate)
+        public async Task<ActionResult<UpdateCommandLineCommandResponse>> Put(Guid platformId, Guid commandLineId, CommandLineModel commandLineToUpdate)
         {
-            var response = await _mediator.Send(commandLineToUpdate);
+            var command = new UpdateCommandLineCommand { CommandLineId = commandLineId, PromptPlatformId = platformId, CommandLine = commandLineToUpdate };
+
+            var response = await _mediator.Send(command);
 
             if (response.Success == false && response.Message == "Notfound")
                 return NotFound($"CommandLine to upate, with Id {commandLineToUpdate.CommandLineId}, was not found!");

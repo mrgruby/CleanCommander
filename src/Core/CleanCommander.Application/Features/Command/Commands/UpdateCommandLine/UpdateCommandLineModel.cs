@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CleanCommander.Application.Features.Command.Commands.UpdateCommandLine
 {
-    public class UpdateCommandLineDto
+    public class UpdateCommandLineModel
     {
         public string HowTo { get; set; }
         public string Line { get; set; }

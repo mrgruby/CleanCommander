@@ -34,9 +34,14 @@ namespace CleanCommander.Application.Features.Command.Commands.UpdateCommandLine
                 return response;
             }
 
+            if(request.CommandLine != null)
+            {
+
+            }
+
             //Check the request to see if any of the validation rules, set up for the CreateCommandLineCommand class inside the CreateEventCommandValidator, are broken.
             //If so, add the error message to the ValidationErrors list in the validationResult.
-            var validationResult = await validator.ValidateAsync(request);
+            var validationResult = await validator.ValidateAsync(request.CommandLine);
 
             if (validationResult.Errors.Count > 0)
             {
@@ -49,7 +54,7 @@ namespace CleanCommander.Application.Features.Command.Commands.UpdateCommandLine
             }
             if (response.Success)
             {
-                _mapper.Map(request, commandLineFromDbToUpdate);
+                _mapper.Map(request.CommandLine, commandLineFromDbToUpdate);
 
                 _repo.Update(commandLineFromDbToUpdate);
             }

@@ -1,4 +1,5 @@
 ﻿using CleanCommander.Application.Features.Command.Commands.CreateCommand;
+using CleanCommander.Application.Models;
 using FluentValidation;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CleanCommander.Application.Features.Command.Commands.UpdateCommandLine
 {
-    public class UpdateCommandLineCommandValidator : AbstractValidator<UpdateCommandLineCommand>
+    public class UpdateCommandLineCommandValidator : AbstractValidator<CommandLineModel>
     {
         public UpdateCommandLineCommandValidator()
         {
