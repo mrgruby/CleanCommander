@@ -11,5 +11,6 @@ namespace CleanCommander.Application.Features.Platforms.Commands.UpdatePlatform
     {
         public Guid PromptPlatformId { get; set; }
         public string PromptPlatformName { get; set; }
+        public string PromptPlatformImageUrl { get; set; }
     }
 }

@@ -10,6 +10,7 @@ namespace CleanCommander.Domain.Entities
     {
         public Guid PromptPlatformId { get; set; }
         public string PromptPlatformName { get; set; }
+        public string PromptPlatformImageUrl { get; set; }
         public virtual ICollection<CommandLine> CommandLineList { get; set; }
     }
 }

@@ -10,6 +10,7 @@ namespace CleanCommander.Application.Features.Platforms.Queries.GetPlatformsList
     {
         public Guid PromptPlatformId { get; set; }
         public string PromptPlatformName { get; set; }
+        public string PromptPlatformImageUrl { get; set; }
         public ICollection<GetPlatformsListCommandDto> CommandLineList { get; set; }
     }
 }

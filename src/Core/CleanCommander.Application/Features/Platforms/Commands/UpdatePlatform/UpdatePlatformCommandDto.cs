@@ -9,5 +9,6 @@ namespace CleanCommander.Application.Features.Platforms.Commands.UpdatePlatform
     public class UpdatePlatformCommandDto
     {
         public string PromptPlatformName { get; set; }
+        public string PromptPlatformImageUrl { get; set; }
     }
 }

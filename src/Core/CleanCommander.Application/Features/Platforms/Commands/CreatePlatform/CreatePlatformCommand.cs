@@ -10,5 +10,6 @@ namespace CleanCommander.Application.Features.Platform.Commands.CreatePlatform
     public class CreatePlatformCommand : IRequest<CreatePlatformCommandResponse>
     {
         public string PromptPlatformName { get; set; }
+        public string PromptPlatformImageUrl { get; set; }
     }
 }
