@@ -31,7 +31,7 @@ namespace CleanCommander.Api.Controllers
         {
             var dtos = await _mediator.Send(new GetPlatformsListQuery());
             
-            return Ok(dtos);
+            return Ok(dtos); 
         }
         //https://localhost:44363/api/platform/6313179F-7837-473A-A4D5-A5571B43E6A6
         [HttpGet("{promptPlatformId:Guid}", Name = "GetPlatformById")]
