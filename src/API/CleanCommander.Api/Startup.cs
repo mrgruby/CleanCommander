@@ -14,6 +14,9 @@ using System.Threading.Tasks;
 
 namespace CleanCommander.Api
 {
+    /// <summary>
+    /// Startup
+    /// </summary>
     public class Startup
     {
         public IConfiguration configuration;
