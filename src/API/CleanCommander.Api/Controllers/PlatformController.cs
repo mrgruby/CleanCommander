@@ -1,11 +1,14 @@
-﻿using CleanCommander.Application.Features.Platform.Commands.CreatePlatform;
+﻿using CleanCommander.Application.Features.Command.Queries.FindCommand;
+using CleanCommander.Application.Features.Platform.Commands.CreatePlatform;
 using CleanCommander.Application.Features.Platforms.Commands.DeletePlatform;
 using CleanCommander.Application.Features.Platforms.Commands.UpdatePlatform;
 using CleanCommander.Application.Features.Platforms.Queries.GetPlatformById;
 using CleanCommander.Application.Features.Platforms.Queries.GetPlatformsList;
+using CleanCommander.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.DotNet.PlatformAbstractions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,18 +33,29 @@ namespace CleanCommander.Api.Controllers
         public async Task<ActionResult<List<GetPlatformsListReturnModel>>> Get()
         {
             var dtos = await _mediator.Send(new GetPlatformsListQuery());
-            
-            return Ok(dtos); 
+
+            return Ok(dtos);
         }
         //https://localhost:44363/api/platform/6313179F-7837-473A-A4D5-A5571B43E6A6
         [HttpGet("{promptPlatformId:Guid}", Name = "GetPlatformById")]
         public async Task<ActionResult<List<GetPlatformsListReturnModel>>> Get(Guid promptPlatformId)
         {
-            var platform = await _mediator.Send(new GetPlatformByIdQuery { PromptPlatformId  = promptPlatformId});
+            var platform = await _mediator.Send(new GetPlatformByIdQuery { PromptPlatformId = promptPlatformId });
 
             if (platform == null)
                 return NotFound($"The platform with id {promptPlatformId}, was not found");
             return Ok(platform);
+        }
+
+        //https://localhost:44363/api/platform/{searchTerm}
+        [HttpGet("{searchTerm}", Name = "FindCommands")]
+        public async Task<ActionResult<List<FindCommandReturnModel>>> Find(string searchTerm)
+        {
+            var commands = await _mediator.Send(new FindCommandQuery { SearchTerm = searchTerm });
+
+            if (commands == null)
+                return NotFound($"No commands were found, when searching for the term {searchTerm} ");
+            return Ok(commands);
         }
 
         //https://localhost:44363/api/platform/
@@ -57,7 +71,7 @@ namespace CleanCommander.Api.Controllers
         }
 
         [HttpPut]
-        public async Task<ActionResult<UpdatePlatformCommandResponse>>Put(UpdatePlatformCommand platformToUpdate)
+        public async Task<ActionResult<UpdatePlatformCommandResponse>> Put(UpdatePlatformCommand platformToUpdate)
         {
             var response = await _mediator.Send(platformToUpdate);
 
