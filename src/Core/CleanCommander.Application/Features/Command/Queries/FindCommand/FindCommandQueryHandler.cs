@@ -25,7 +25,7 @@ namespace CleanCommander.Application.Features.Command.Queries.FindCommand
 
         public async Task<List<FindCommandReturnModel>> Handle(FindCommandQuery request, CancellationToken cancellationToken)
         {
-            var commands = await _commandRepo.Find(c => c.Line.Contains(request.SearchTerm));
+            var commands = await _commandRepo.Find(c => c.HowTo.Contains(request.SearchTerm));
 
             if (commands == null)
                 throw new NotFoundException(nameof(FindCommandReturnModel), request.SearchTerm);
