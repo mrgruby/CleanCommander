@@ -20,5 +20,10 @@ namespace CleanCommander.Persistence.Repositories
         {
             return await _dbContext.PromptPlatforms.Include(x => x.CommandLineList).ToListAsync();
         }
+
+        public async Task<PromptPlatform> GetPlatformByIdWithCommands(Guid id)
+        {
+            return await _dbContext.PromptPlatforms.Where(p => p.PromptPlatformId == id).Include(x => x.CommandLineList).FirstOrDefaultAsync();
+        }
     }
 }

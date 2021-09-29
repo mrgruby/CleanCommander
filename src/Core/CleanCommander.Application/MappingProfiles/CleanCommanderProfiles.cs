@@ -29,12 +29,13 @@ namespace CleanCommander.Application.MappingProfiles
 
             CreateMap<CommandLine, GetCommandLineListByPlatformReturnModel>().ReverseMap();
             CreateMap<CommandLine, GetPlatformsListCommandDto>().ReverseMap();
+            CreateMap<CommandLine, GetPlatformByIdCommandDto>().ReverseMap();
             CreateMap<CommandLine, CommandDetailsReturnModel>().ReverseMap();
             CreateMap<CommandLine, CreateCommandLineDto>().ReverseMap();
             CreateMap<CommandLine, CreateCommandLineCommand>().ReverseMap();
             CreateMap<CommandLine, PatchCommandLineDto>().ReverseMap();
             CreateMap<CommandLine, UpdateCommandLineCommand>().ReverseMap();//FindCommandReturnModel
-            CreateMap<CommandLine, FindCommandReturnModel>().ReverseMap();//FindCommandReturnModel
+            CreateMap<CommandLine, FindCommandReturnModel>().ReverseMap();//FindCommandReturnModel 
 
 
             CreateMap<CommandLine, CommandLineModel>().ReverseMap();
