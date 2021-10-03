@@ -70,6 +70,11 @@ namespace CleanCommander.Api.Controllers
                 return BadRequest($"Failed to save new Platform - {string.Join(", ", response.ValidationErrors)}");
         }
 
+        /// <summary>
+        /// Update platform, including the list of commands
+        /// </summary>
+        /// <param name="platformToUpdate"></param>
+        /// <returns></returns>
         [HttpPut]
         public async Task<ActionResult<UpdatePlatformCommandResponse>> Put(UpdatePlatformCommand platformToUpdate)
         {
