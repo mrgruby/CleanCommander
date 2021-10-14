@@ -11,15 +11,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{87F8DB54-9
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{1B01B5E8-6621-4D07-9A74-C46CD676005F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanCommander.Api", "src\API\CleanCommander.Api\CleanCommander.Api.csproj", "{95D566F9-853A-46F4-A247-092D8A94607F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CleanCommander.Api", "src\API\CleanCommander.Api\CleanCommander.Api.csproj", "{95D566F9-853A-46F4-A247-092D8A94607F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanCommander.Application", "src\Core\CleanCommander.Application\CleanCommander.Application.csproj", "{543C3849-C056-47C2-A815-873C6855131D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CleanCommander.Application", "src\Core\CleanCommander.Application\CleanCommander.Application.csproj", "{543C3849-C056-47C2-A815-873C6855131D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanCommander.Domain", "src\Core\CleanCommander.Domain\CleanCommander.Domain.csproj", "{57937CA1-6470-49F3-9DD9-31C544A0598F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CleanCommander.Domain", "src\Core\CleanCommander.Domain\CleanCommander.Domain.csproj", "{57937CA1-6470-49F3-9DD9-31C544A0598F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanCommander.Persistence", "src\Infrastructure\CleanCommander.Persistence\CleanCommander.Persistence.csproj", "{2A678176-A294-4EC6-A7D4-69AE8A8B9FBC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CleanCommander.Persistence", "src\Infrastructure\CleanCommander.Persistence\CleanCommander.Persistence.csproj", "{2A678176-A294-4EC6-A7D4-69AE8A8B9FBC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanCommander.Infrastructure", "src\Infrastructure\CleanCommander.Infrastructure\CleanCommander.Infrastructure.csproj", "{BE85FD61-8B52-42C6-BC94-D980E324132F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CleanCommander.Infrastructure.Identity", "src\Infrastructure\CleanCommander.Infrastructure\CleanCommander.Infrastructure.Identity.csproj", "{BE85FD61-8B52-42C6-BC94-D980E324132F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

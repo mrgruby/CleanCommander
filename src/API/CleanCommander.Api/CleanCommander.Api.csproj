@@ -22,7 +22,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Core\CleanCommander.Application\CleanCommander.Application.csproj" />
-    <ProjectReference Include="..\..\Infrastructure\CleanCommander.Infrastructure\CleanCommander.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\CleanCommander.Infrastructure\CleanCommander.Infrastructure.Identity.csproj" />
     <ProjectReference Include="..\..\Infrastructure\CleanCommander.Persistence\CleanCommander.Persistence.csproj" />
   </ItemGroup>
 
