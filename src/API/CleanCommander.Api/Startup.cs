@@ -1,5 +1,5 @@
 using CleanCommander.Application;
-using GloboTicket.TicketManagement.Persistence;
+using CleanCommander.Persistence;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
