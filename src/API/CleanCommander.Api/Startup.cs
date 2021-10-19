@@ -1,4 +1,5 @@
 using CleanCommander.Application;
+using CleanCommander.Infrastructure.Identity;
 using CleanCommander.Persistence;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -32,6 +33,7 @@ namespace CleanCommander.Api
             services.AddApplicationServices();
             //services.AddInfrastructureServices(configuration);
             services.AddPersistenceServices(configuration);
+            services.AddAuthenticationServices(configuration);
             services.AddControllers().AddNewtonsoftJson(options => 
             options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
             services.AddSwaggerGen();

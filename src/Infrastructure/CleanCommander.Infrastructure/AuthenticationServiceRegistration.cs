@@ -13,7 +13,7 @@ namespace CleanCommander.Infrastructure.Identity
 {
     public static class AuthenticationServiceRegistration
     {
-        public static IServiceCollection AddPersistenceServices(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddAuthenticationServices(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddAuthentication(opt =>
             {
