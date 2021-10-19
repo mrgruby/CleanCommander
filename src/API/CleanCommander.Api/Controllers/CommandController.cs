@@ -7,6 +7,7 @@ using CleanCommander.Application.Features.Command.Queries.GetCommandDetail;
 using CleanCommander.Application.Features.Command.Queries.GetCommandsList;
 using CleanCommander.Application.Models;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
@@ -59,6 +60,7 @@ namespace CleanCommander.Api.Controllers
         /// <param name="commandLine">The model object that is posted from the user/UI</param>
         /// <returns>The newly created ressource, along with a link to it.</returns>
         /// api/platform/{platformId}/command
+        [Authorize]
         [HttpPost]
         public async Task<ActionResult<CreateCommandLineCommandResponse>> Post(Guid platformId, CommandLineModel commandLineToAdd)
         {
@@ -81,6 +83,7 @@ namespace CleanCommander.Api.Controllers
         /// <param name="commandLineId">Id of the commandline to update</param>
         /// <returns></returns>
         //https://localhost:44363/api/platform/6313179F-7837-473A-A4D5-A5571B43E6A6/command/adc42c09-08c1-4d2c-9f96-2d15bb1af299
+        [Authorize]
         [HttpPatch("{commandLineId:Guid}")]
         public async Task<ActionResult>Patch([FromBody] JsonPatchDocument<PatchCommandLineDto> commmandLineToUpdate, Guid platformId, Guid commandLineId)
         {
@@ -105,6 +108,7 @@ namespace CleanCommander.Api.Controllers
         /// <param name="commandLineId"></param>
         /// <returns></returns>
         //https://localhost:44363/api/platform/6313179F-7837-473A-A4D5-A5571B43E6A6/command/adc42c09-08c1-4d2c-9f96-2d15bb1af299
+        [Authorize]
         [HttpPut("{commandLineId:Guid}")]
         public async Task<ActionResult<UpdateCommandLineCommandResponse>> Put(Guid platformId, Guid commandLineId, CommandLineModel commandLineToUpdate)
         {
@@ -122,6 +126,7 @@ namespace CleanCommander.Api.Controllers
 
 
         //https://localhost:44363/api/platform/6313179F-7837-473A-A4D5-A5571B43E6A6/command/adc42c09-08c1-4d2c-9f96-2d15bb1af299
+        [Authorize]
         [HttpDelete("{commandLineId:Guid}")]
         public async Task<ActionResult<DeleteCommandLineCommandResponse>>Delete(Guid platformId, Guid commandLineId)
         {

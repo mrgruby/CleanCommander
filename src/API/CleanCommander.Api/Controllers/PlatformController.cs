@@ -6,6 +6,7 @@ using CleanCommander.Application.Features.Platforms.Queries.GetPlatformById;
 using CleanCommander.Application.Features.Platforms.Queries.GetPlatformsList;
 using CleanCommander.Domain.Entities;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.DotNet.PlatformAbstractions;
@@ -59,6 +60,7 @@ namespace CleanCommander.Api.Controllers
         }
 
         //https://localhost:44363/api/platform/
+        [Authorize]
         [HttpPost]
         public async Task<ActionResult<CreatePlatformCommandResponse>> Post(CreatePlatformCommand platform)
         {
@@ -75,6 +77,8 @@ namespace CleanCommander.Api.Controllers
         /// </summary>
         /// <param name="platformToUpdate"></param>
         /// <returns></returns>
+        /// 
+        [Authorize]
         [HttpPut]
         public async Task<ActionResult<UpdatePlatformCommandResponse>> Put(UpdatePlatformCommand platformToUpdate)
         {
@@ -88,6 +92,7 @@ namespace CleanCommander.Api.Controllers
             return NoContent();
         }
 
+        [Authorize]
         [HttpDelete("{promptPlatformId:Guid}")]
         public async Task<ActionResult<DeletePlatformResponse>> Delete(Guid promptPlatformId)
         {
