@@ -40,6 +40,7 @@ namespace CleanCommander.Api
             {
                 options.AddPolicy("Open", builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
             });
+
         }
 
         private void AddSwagger(IServiceCollection services)
@@ -68,6 +69,7 @@ namespace CleanCommander.Api
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Commander API"));
 
             app.UseCors("Open");
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
