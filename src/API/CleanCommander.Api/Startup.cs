@@ -68,6 +68,7 @@ namespace CleanCommander.Api
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Commander API"));
 
             app.UseCors("Open");
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
