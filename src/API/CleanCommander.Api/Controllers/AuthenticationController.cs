@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using CleanCommander.Application.Contracts.Authentication;
+using CleanCommander.Application.Models.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -13,5 +15,19 @@ namespace CleanCommander.Api.Controllers
     [Authorize]
     public class AuthenticationController : ControllerBase
     {
+        private readonly IAuthenticationService authenticationService;
+
+        public AuthenticationController(IAuthenticationService authenticationService)
+        {
+            this.authenticationService = authenticationService;
+        }
+
+
+        [HttpPost("authenticate")]
+        public ActionResult<AuthenticationResponse> Authenticate(AuthenticationRequest request)
+        {
+            var response = authenticationService.Authenticate(request);
+            return Ok(response);
+        }
     }
 }

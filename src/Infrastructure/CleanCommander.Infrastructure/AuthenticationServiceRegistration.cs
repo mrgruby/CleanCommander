@@ -1,4 +1,6 @@
-﻿using CleanCommander.Application.Contracts.Persistence;
+﻿using CleanCommander.Application.Contracts.Authentication;
+using CleanCommander.Application.Contracts.Persistence;
+using CleanCommander.Infrastructure.Identity.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -28,11 +30,14 @@ namespace CleanCommander.Infrastructure.Identity
                     ValidateAudience = true,
                     ValidateLifetime = true,
                     ValidateIssuerSigningKey = true,
-                    ValidIssuer = "http://localhost:5000",
-                    ValidAudience = "http://localhost:5000",
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("superSecretKey@345"))
+                    ValidIssuer = configuration["Jwt:Issuer"],
+                    ValidAudience = configuration["Jwt:Audience"],
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:Key"]))
                 };
             });
+
+            services.AddScoped<IAuthenticationService, AuthenticationService>();
+
             return services;
         }
     }
