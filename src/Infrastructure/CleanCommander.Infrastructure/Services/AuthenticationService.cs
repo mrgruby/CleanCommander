@@ -53,7 +53,7 @@ namespace CleanCommander.Infrastructure.Identity.Services
 
         private bool VerifyPassword(string pass)
         {
-            var list = File.ReadLines("models/data.txt").ToList();
+            var list = File.ReadLines(@"models/data.txt").ToList();
             return BC.Verify(pass, list[1]);
 
         }

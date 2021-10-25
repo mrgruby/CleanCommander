@@ -12,7 +12,6 @@ namespace CleanCommander.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
     public class AuthenticationController : ControllerBase
     {
         private readonly IAuthenticationService authenticationService;
@@ -23,7 +22,7 @@ namespace CleanCommander.Api.Controllers
         }
 
 
-        [HttpPost("authenticate")]
+        [HttpPost, Route("authenticate")]
         public ActionResult<AuthenticationResponse> Authenticate(AuthenticationRequest request)
         {
             var response = authenticationService.Authenticate(request);
