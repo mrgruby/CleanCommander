@@ -24,15 +24,13 @@ namespace CleanCommander.Infrastructure.Identity.Services
         }
         public AuthenticationResponse Authenticate(AuthenticationRequest request)
         {
-            //Get user data from db
-
-            // Check if passed in data matches
+            var response = new AuthenticationResponse();
             string token;
             //If match, call GenerateJwtToken.
             if (VerifyPassword(request.Password))
-                token = GenerateJwtToken(request.UserName);
+                response.Token = GenerateJwtToken(request.UserName);
 
-            return new AuthenticationResponse { Token = token };
+            return response;
             //If not, return
         }
 
