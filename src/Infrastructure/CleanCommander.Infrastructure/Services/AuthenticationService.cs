@@ -5,9 +5,11 @@ using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
+using System.IO;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
+using BC = BCrypt.Net.BCrypt;
 using System.Threading.Tasks;
 
 namespace CleanCommander.Infrastructure.Identity.Services
@@ -22,7 +24,16 @@ namespace CleanCommander.Infrastructure.Identity.Services
         }
         public AuthenticationResponse Authenticate(AuthenticationRequest request)
         {
-            throw new NotImplementedException();
+            //Get user data from db
+
+            // Check if passed in data matches
+            string token;
+            //If match, call GenerateJwtToken.
+            if (VerifyPassword(request.Password))
+                token = GenerateJwtToken(request.UserName);
+
+            return new AuthenticationResponse { Token = token };
+            //If not, return
         }
 
         private string GenerateJwtToken(string username)
@@ -34,11 +45,19 @@ namespace CleanCommander.Infrastructure.Identity.Services
             var token = new JwtSecurityToken(
                 _configuration["Issuer"],
                 _configuration["Audience"],
+                claims: new List<Claim>(),
                 expires: expires,
                 signingCredentials: creds
             );
 
             return new JwtSecurityTokenHandler().WriteToken(token);
+        }
+
+        private bool VerifyPassword(string pass)
+        {
+            var list = File.ReadLines("models/data.txt").ToList();
+            return BC.Verify(pass, list[1]);
+
         }
     }
 }
