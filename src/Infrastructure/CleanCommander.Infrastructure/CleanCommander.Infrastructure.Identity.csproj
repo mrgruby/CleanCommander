@@ -9,7 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Models\data.txt">
+    <Content Include="Services\data.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

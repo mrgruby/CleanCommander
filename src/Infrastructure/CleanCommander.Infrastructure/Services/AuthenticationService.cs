@@ -25,24 +25,21 @@ namespace CleanCommander.Infrastructure.Identity.Services
         public AuthenticationResponse Authenticate(AuthenticationRequest request)
         {
             var response = new AuthenticationResponse();
-            string token;
-            //If match, call GenerateJwtToken.
             if (VerifyPassword(request.Password))
                 response.Token = GenerateJwtToken(request.UserName);
 
             return response;
-            //If not, return
         }
 
         private string GenerateJwtToken(string username)
         {
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Key"]));
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
             var expires = DateTime.Now.AddDays(Convert.ToDouble(20));
 
             var token = new JwtSecurityToken(
-                _configuration["Issuer"],
-                _configuration["Audience"],
+                _configuration["Jwt:Issuer"],
+                _configuration["Jwt:Audience"],
                 claims: new List<Claim>(),
                 expires: expires,
                 signingCredentials: creds
@@ -53,9 +50,9 @@ namespace CleanCommander.Infrastructure.Identity.Services
 
         private bool VerifyPassword(string pass)
         {
-            var list = File.ReadLines(@"models/data.txt").ToList();
-            return BC.Verify(pass, list[1]);
-
+            var hash = _configuration["Jwt:Hash"];
+            //var list = File.ReadLines("data.txt").ToList();
+            return BC.Verify(pass, hash);
         }
     }
 }
