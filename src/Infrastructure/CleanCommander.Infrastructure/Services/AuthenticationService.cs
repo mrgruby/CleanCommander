@@ -11,21 +11,24 @@ using System.Security.Claims;
 using System.Text;
 using BC = BCrypt.Net.BCrypt;
 using System.Threading.Tasks;
+using CleanCommander.Application.Contracts.Persistence;
 
 namespace CleanCommander.Infrastructure.Identity.Services
 {
     public class AuthenticationService : IAuthenticationService
     {
         private readonly IConfiguration _configuration;
+        private readonly IUserRepository _userRepo;
 
-        public AuthenticationService(IConfiguration configuration)
+        public AuthenticationService(IConfiguration configuration, IUserRepository userRepo)
         {
             _configuration = configuration;
+            _userRepo = userRepo;
         }
         public AuthenticationResponse Authenticate(AuthenticationRequest request)
         {
             var response = new AuthenticationResponse();
-            if (VerifyPassword(request.Password))
+            if (VerifyPassword(request.Password, request.UserName))
                 response.Token = GenerateJwtToken(request.UserName);
 
             return response;
@@ -48,11 +51,17 @@ namespace CleanCommander.Infrastructure.Identity.Services
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
-        private bool VerifyPassword(string pass)
+        private bool VerifyPassword(string pass, string userName)
         {
-            var hash = _configuration["Jwt:Hash"];
-            //var list = File.ReadLines("data.txt").ToList();
-            return BC.Verify(pass, hash);
+            //Get user by username from database.
+            var user = _userRepo.GetUserByUserName(userName);
+            if (user is not null)
+            {
+                //For some reason, \r\n is appended to the returned password hash json string. Remove this...
+                user.PassWordHash = user.PassWordHash.Replace(System.Environment.NewLine, string.Empty);
+                return BC.Verify(pass, user.PassWordHash);
+            }
+            return false;
         }
     }
 }

@@ -1,7 +1,10 @@
 ﻿using CleanCommander.Application.Contracts.Authentication;
 using CleanCommander.Application.Contracts.Persistence;
+using CleanCommander.Infrastructure.Identity.Persistence;
+using CleanCommander.Infrastructure.Identity.Repositories;
 using CleanCommander.Infrastructure.Identity.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
@@ -17,6 +20,9 @@ namespace CleanCommander.Infrastructure.Identity
     {
         public static IServiceCollection AddAuthenticationServices(this IServiceCollection services, IConfiguration configuration)
         {
+            services.AddDbContext<AuthenticationDbContext>(options =>
+                options.UseSqlServer(configuration.GetConnectionString("CleanCommanderConnectionString")));
+
             services.AddAuthentication(opt =>
             {
                 opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -37,6 +43,7 @@ namespace CleanCommander.Infrastructure.Identity
             });
 
             services.AddScoped<IAuthenticationService, AuthenticationService>();
+            services.AddScoped<IUserRepository, UserRepository>();
 
             return services;
         }
