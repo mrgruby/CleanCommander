@@ -29,7 +29,10 @@ namespace CleanCommander.Infrastructure.Identity.Services
         {
             var response = new AuthenticationResponse();
             if (VerifyPassword(request.Password, request.UserName))
+            {
                 response.Token = GenerateJwtToken(request.UserName);
+                response.UserName = request.UserName;
+            }
 
             return response;
         }
@@ -38,8 +41,7 @@ namespace CleanCommander.Infrastructure.Identity.Services
         {
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-            var expires = DateTime.Now.AddDays(Convert.ToDouble(20));
-
+            var expires = DateTime.Now.AddDays(Convert.ToDouble(20));//Token expires in 20 days
             var token = new JwtSecurityToken(
                 _configuration["Jwt:Issuer"],
                 _configuration["Jwt:Audience"],
@@ -63,5 +65,11 @@ namespace CleanCommander.Infrastructure.Identity.Services
             }
             return false;
         }
+
+        //private bool ValidateToken(string username, string token)
+        //{
+        //    var handler = new JwtSecurityTokenHandler();
+        //    handler.ValidateToken(token)
+        //}
     }
 }
