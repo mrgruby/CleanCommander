@@ -10,6 +10,9 @@ using System.Threading.Tasks;
 
 namespace CleanCommander.Persistence.Repositories
 {
+    /// <summary>
+    /// Inherit from the GenericRepository with a specific type, and implement the specific ICommandRepository
+    /// </summary>
     public class CommandRepository : GenericRepository<CommandLine>, ICommandRepository
     {
         public CommandRepository(CleanCommanderDbContext dbContext) : base(dbContext)

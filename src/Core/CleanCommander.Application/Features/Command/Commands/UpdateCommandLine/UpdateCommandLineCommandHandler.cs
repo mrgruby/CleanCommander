@@ -25,8 +25,10 @@ namespace CleanCommander.Application.Features.Command.Commands.UpdateCommandLine
             var response = new UpdateCommandLineCommandResponse();
             var validator = new UpdateCommandLineCommandValidator();
 
+            //Get the command we want to update from the database. Use the id's from the request.
             var commandLineFromDbToUpdate = await _repo.GetCommandLineByPlatform(request.PromptPlatformId, request.CommandLineId);
 
+            //If the command does not exist, return a failed response.
             if (commandLineFromDbToUpdate == null)
             {
                 response.Success = false;

@@ -25,6 +25,12 @@ namespace CleanCommander.Infrastructure.Identity.Services
             _configuration = configuration;
             _userRepo = userRepo;
         }
+
+        /// <summary>
+        /// Login using the passed in username and password.
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         public AuthenticationResponse Authenticate(AuthenticationRequest request)
         {
             var response = new AuthenticationResponse();

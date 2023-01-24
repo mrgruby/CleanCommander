@@ -48,6 +48,11 @@ namespace CleanCommander.Api.Controllers
             return Ok(platform);
         }
 
+        /// <summary>
+        /// This is used to search for commands, where the commandline contains the searchterm. This would be a search bar in the UI.
+        /// </summary>
+        /// <param name="searchTerm"></param>
+        /// <returns></returns>
         //https://localhost:44363/api/platform/{searchTerm}
         [HttpGet("{searchTerm}", Name = "FindCommands")]
         public async Task<ActionResult<List<FindCommandReturnModel>>> Find(string searchTerm)
@@ -66,7 +71,7 @@ namespace CleanCommander.Api.Controllers
         {
             var response = await _mediator.Send(platform);
 
-            //TODO: I think I need to map to a read dto first, and the return that here....
+            //TODO: I think I need to map to a read dto first, and then return that here....
             if (response.Success)
                 return CreatedAtRoute("GetPlatformById", new { PromptPlatformId = response.CreatePlatformCommandDto.PromptPlatformId }, response.CreatePlatformCommandDto);
             else

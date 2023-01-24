@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using CleanCommander.Application.Contracts.Persistence;
+using CleanCommander.Application.Exceptions;
 using CleanCommander.Application.Features.Platforms.Commands.CreatePlatform;
 using CleanCommander.Domain.Entities;
 using MediatR;
@@ -24,23 +25,25 @@ namespace CleanCommander.Application.Features.Platform.Commands.CreatePlatform
         }
         public async Task<CreatePlatformCommandResponse> Handle(CreatePlatformCommand request, CancellationToken cancellationToken)
         {
-            var response = new CreatePlatformCommandResponse();
+            var response = new CreatePlatformCommandResponse();//Success is set to true by default
             var validator = new CreatePlatformCommandValidator();
 
-            //Check the request to see if any of the validation rules, set up for the CreateCommandLineCommand class inside the CreateEventCommandValidator, are broken.
-            //If so, add the error message to the ValidationErrors list in the validationResult.
+            //Check the request to see if any of the validation rules, set up for the CreateCommandLineCommand class inside the CreateEventCommandValidator,
+            //are broken.If so, add the error message to the ValidationErrors list in the validationResult.
             var validationResult = await validator.ValidateAsync(request);
 
             if (validationResult.Errors.Count > 0)
             {
+                //These are located in the BaseResponse class
                 response.Success = false;
                 response.ValidationErrors = new List<string>();
                 foreach (var error in validationResult.Errors)
                 {
                     response.ValidationErrors.Add(error.ErrorMessage);
                 }
+                throw new ValidationException(validationResult);
             }
-            if (response.Success)
+            if (response.Success)//Success is set to true by default
             {
                 var platformToAdd =_mapper.Map<PromptPlatform>(request);
 
