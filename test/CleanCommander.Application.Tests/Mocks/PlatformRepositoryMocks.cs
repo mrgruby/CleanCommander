@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CleanCommander.Application.Tests
+namespace CleanCommander.Application.Tests.Mocks
 {
-    public class IdentityRepositoryMocks
+    public static class PlatformRepositoryMocks
     {
     }
 }

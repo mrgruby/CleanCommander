@@ -65,7 +65,7 @@ namespace CleanCommander.Infrastructure.Identity.Services
             var user = _userRepo.GetUserByUserName(userName);
             if (user is not null)
             {
-                //For some reason, \r\n is appended to the returned password hash json string. Remove this...
+                //For some reason, \r\n (NewLine) is appended to the returned password hash json string. Remove this...
                 user.PassWordHash = user.PassWordHash.Replace(System.Environment.NewLine, string.Empty);
                 return BC.Verify(pass, user.PassWordHash);
             }

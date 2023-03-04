@@ -69,39 +69,6 @@ namespace CleanCommander.Application.Tests.CommandTests
             commands.Add(commandLineToAdd);
             var allCommands = await _mockCommandRepository.Object.All();
             allCommands.Should().HaveCount(5);
-
-            //Test that the Id of the created object  
-            //_mockCommandRepository.Verify(p => p.Add(It.Is<CommandLine>(c => c.CommandLineId == result.CommandLineDto.CommandLineId)));
-
-            //_mediator.Setup(m => m.Send(It.IsAny<CreateCommandLineCommandResponse>, CancellationToken.None)).Callback(
-            //    (CreateCommandLineCommandResponse response, CancellationToken token) =>
-            //    {
-            //        commands.Add(_mapper.Map<CommandLine>(handlerCommand.CommandLineModel));
-            //        return response;
-            //    });
-
-            //_mediator.Setup(m => m.Send(handlerCommand, CancellationToken.None)).Returns(
-            //    (CreateCommandLineCommandResponse response) =>
-            //    {
-            //        commands.Add(_mapper.Map<CommandLine>(handlerCommand.CommandLineModel));
-            //        return response;
-            //    });
-
-
-            //_mediator.Setup(m => m.Send(handlerCommand, default)).Returns(
-            //    (CreateCommandLineCommandResponse response) =>
-            //    {
-            //        commands.Add(_mapper.Map<CommandLine>(handlerCommand.CommandLineModel));
-            //        return response;
-            //    });
-
-
-            //_mockCreateCommandLineCommandHandler.Setup(repo => repo.Handle(handlerCommand, default)).ReturnsAsync(
-            //    (CreateCommandLineCommandResponse response) =>
-            //    {
-            //        commands.Add(_mapper.Map<CommandLine>(handlerCommand.CommandLineModel));
-            //        return response;
-            //    });
         }
     }
 }

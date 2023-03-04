@@ -23,7 +23,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CleanCommander.Infrastructu
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{A67738FD-B92B-48F5-A9BA-F4E0356E3148}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanCommander.Application.Tests", "test\CleanCommander.Application.Tests\CleanCommander.Application.Tests.csproj", "{B98A7596-70E2-4034-9DA3-3E8963FDDE25}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CleanCommander.Application.Tests", "test\CleanCommander.Application.Tests\CleanCommander.Application.Tests.csproj", "{B98A7596-70E2-4034-9DA3-3E8963FDDE25}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
