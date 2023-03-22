@@ -2,6 +2,7 @@
 using CleanCommander.Application.Contracts.Persistence;
 using CleanCommander.Application.Exceptions;
 using CleanCommander.Application.Features.Platforms.Commands.CreatePlatform;
+using CleanCommander.Application.Responses;
 using CleanCommander.Domain.Entities;
 using MediatR;
 using System;
@@ -13,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace CleanCommander.Application.Features.Platform.Commands.CreatePlatform
 {
-    public class CreatePlatformCommandHandler : IRequestHandler<CreatePlatformCommand, CreatePlatformCommandResponse>
+    public class CreatePlatformCommandHandler : IRequestHandler<CreatePlatformCommand, CreateResponse<CreatePlatformCommandDto>>
     {
         private readonly IPlatformRepository _repo;
         private readonly IMapper _mapper;
@@ -23,9 +24,9 @@ namespace CleanCommander.Application.Features.Platform.Commands.CreatePlatform
             _repo = repo;
             _mapper = mapper;
         }
-        public async Task<CreatePlatformCommandResponse> Handle(CreatePlatformCommand request, CancellationToken cancellationToken)
+        public async Task<CreateResponse<CreatePlatformCommandDto>> Handle(CreatePlatformCommand request, CancellationToken cancellationToken)
         {
-            var response = new CreatePlatformCommandResponse();//Success is set to true by default
+            var response = new CreateResponse<CreatePlatformCommandDto>();//Success is set to true by default
             var validator = new CreatePlatformCommandValidator();
 
             //Check the request to see if any of the validation rules, set up for the CreateCommandLineCommand class inside the CreateEventCommandValidator,
@@ -49,7 +50,7 @@ namespace CleanCommander.Application.Features.Platform.Commands.CreatePlatform
 
                 _repo.Add(platformToAdd);
 
-                response.CreatePlatformCommandDto = _mapper.Map<CreatePlatformCommandDto>(platformToAdd);
+                response.Data = _mapper.Map<CreatePlatformCommandDto>(platformToAdd);
             }
 
             return response;

@@ -13,6 +13,8 @@ namespace CleanCommander.Application.Models.Authentication
         public string UserStatus { get; set; }
         public string Email { get; set; }
         public string Token { get; set; }
+        public string Message { get; set; }
         public string RefreshToken { get; set; }
+        public bool Success { get; set; } = true;
     }
 }

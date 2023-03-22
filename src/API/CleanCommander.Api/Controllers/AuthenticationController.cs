@@ -27,7 +27,7 @@ namespace CleanCommander.Api.Controllers
         {
             var response = authenticationService.Authenticate(request);
             if (response.Token == null)
-                return Unauthorized();
+                return Unauthorized(response);
             return Ok(response);
         }
     }

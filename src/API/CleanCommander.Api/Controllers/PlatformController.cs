@@ -37,9 +37,11 @@ namespace CleanCommander.Api.Controllers
 
             return Ok(dtos);
         }
+
+        //TODO: The returnmodel is wrong! It returns a list of platforms, when it should return a single Platform.....S
         //https://localhost:44363/api/platform/6313179F-7837-473A-A4D5-A5571B43E6A6
         [HttpGet("{promptPlatformId:Guid}", Name = "GetPlatformById")]
-        public async Task<ActionResult<List<GetPlatformsListReturnModel>>> Get(Guid promptPlatformId)
+        public async Task<ActionResult<GetPlatformByIdQueryReturnModel>> Get(Guid promptPlatformId)
         {
             var platform = await _mediator.Send(new GetPlatformByIdQuery { PromptPlatformId = promptPlatformId });
 
@@ -73,7 +75,7 @@ namespace CleanCommander.Api.Controllers
 
             //TODO: I think I need to map to a read dto first, and then return that here....
             if (response.Success)
-                return CreatedAtRoute("GetPlatformById", new { PromptPlatformId = response.CreatePlatformCommandDto.PromptPlatformId }, response.CreatePlatformCommandDto);
+                return CreatedAtRoute("GetPlatformById", new { PromptPlatformId = response.Data.PromptPlatformId }, response.Data);
             else
                 return BadRequest($"Failed to save new Platform - {string.Join(", ", response.ValidationErrors)}");
         }

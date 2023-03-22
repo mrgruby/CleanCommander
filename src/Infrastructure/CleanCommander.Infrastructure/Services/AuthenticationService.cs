@@ -12,6 +12,7 @@ using System.Text;
 using BC = BCrypt.Net.BCrypt;
 using System.Threading.Tasks;
 using CleanCommander.Application.Contracts.Persistence;
+using Microsoft.EntityFrameworkCore;
 
 namespace CleanCommander.Infrastructure.Identity.Services
 {
@@ -34,10 +35,22 @@ namespace CleanCommander.Infrastructure.Identity.Services
         public AuthenticationResponse Authenticate(AuthenticationRequest request)
         {
             var response = new AuthenticationResponse();
-            if (VerifyPassword(request.Password, request.UserName))
+            var user = _userRepo.GetUserByUserName(request.UserName);
+
+            if (user == null)
+            {
+                response.Success = false;
+                response.Message = "User Not Found!";
+            }
+            else if (VerifyPassword(request.Password, request.UserName))
             {
                 response.Token = GenerateJwtToken(request.UserName);
                 response.UserName = request.UserName;
+            }
+            else
+            {
+                response.Success = false;
+                response.Message = "Wrong Password";
             }
 
             return response;
