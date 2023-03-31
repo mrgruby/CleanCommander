@@ -6,6 +6,7 @@ using CleanCommander.Application.Features.Command.Commands.UpdateCommandLine;
 using CleanCommander.Application.Features.Command.Queries.GetCommandDetail;
 using CleanCommander.Application.Features.Command.Queries.GetCommandsList;
 using CleanCommander.Application.Models;
+using CleanCommander.Application.Responses;
 using MediatR;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
@@ -48,7 +49,7 @@ namespace CleanCommander.Api.Controllers
         //api/platform/{platformId}/command/{commandLineId}
         //https://localhost:44363/api/platform/6313179F-7837-473A-A4D5-A5571B43E6A6/command/adc42c09-08c1-4d2c-9f96-2d15bb1af299
         [HttpGet("{commandLineId:Guid}", Name = "GetCommandLineByPlatform")]
-        public async Task<ActionResult<CommandDetailsReturnModel>> Get(Guid platformId, Guid commandLineId)
+        public async Task<ActionResult<GetResponse<CommandDetailsReturnModel>>> Get(Guid platformId, Guid commandLineId)
         {
             var getCommandLineByPlatformReturnModel = await _mediator.Send(new GetCommandDetailQuery { PlatformId = platformId, CommandLineId = commandLineId });
             return Ok(getCommandLineByPlatformReturnModel);
@@ -63,14 +64,14 @@ namespace CleanCommander.Api.Controllers
         /// api/platform/{platformId}/command
         [Authorize]
         [HttpPost]
-        public async Task<ActionResult<CreateCommandLineCommandResponse>> Post(Guid platformId, CommandLineModel commandLineToAdd)
+        public async Task<ActionResult<CreateResponse<CreateCommandLineDto>>> Post(Guid platformId, CommandLineModel commandLineToAdd)
         {
             var command = new CreateCommandLineCommand { CommandLineModel = commandLineToAdd };
             var retunModel = await _mediator.Send(command);
 
             if (retunModel.Success)
                 //Return the newly created ressource, along with a link to it.
-                return CreatedAtRoute("GetCommandLineByPlatform", new { platformId = platformId, commandLineId = retunModel.CommandLineDto.CommandLineId }, retunModel.CommandLineDto);
+                return CreatedAtRoute("GetCommandLineByPlatform", new { platformId = platformId, commandLineId = retunModel.Data.CommandLineId }, retunModel);
             else
                 return BadRequest($"Failed to save new CommandLine - {string.Join(", ", retunModel.ValidationErrors)}");
         }

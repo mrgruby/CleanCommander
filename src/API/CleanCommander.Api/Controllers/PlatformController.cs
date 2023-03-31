@@ -1,9 +1,11 @@
 ﻿using CleanCommander.Application.Features.Command.Queries.FindCommand;
 using CleanCommander.Application.Features.Platform.Commands.CreatePlatform;
+using CleanCommander.Application.Features.Platforms.Commands.CreatePlatform;
 using CleanCommander.Application.Features.Platforms.Commands.DeletePlatform;
 using CleanCommander.Application.Features.Platforms.Commands.UpdatePlatform;
 using CleanCommander.Application.Features.Platforms.Queries.GetPlatformById;
 using CleanCommander.Application.Features.Platforms.Queries.GetPlatformsList;
+using CleanCommander.Application.Responses;
 using CleanCommander.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -41,7 +43,7 @@ namespace CleanCommander.Api.Controllers
         //TODO: The returnmodel is wrong! It returns a list of platforms, when it should return a single Platform.....S
         //https://localhost:44363/api/platform/6313179F-7837-473A-A4D5-A5571B43E6A6
         [HttpGet("{promptPlatformId:Guid}", Name = "GetPlatformById")]
-        public async Task<ActionResult<GetPlatformByIdQueryReturnModel>> Get(Guid promptPlatformId)
+        public async Task<ActionResult<GetResponse<GetPlatformByIdQueryReturnModel>>> Get(Guid promptPlatformId)
         {
             var platform = await _mediator.Send(new GetPlatformByIdQuery { PromptPlatformId = promptPlatformId });
 
@@ -69,13 +71,13 @@ namespace CleanCommander.Api.Controllers
         //https://localhost:44363/api/platform/
         [Authorize]
         [HttpPost]
-        public async Task<ActionResult<CreatePlatformCommandResponse>> Post(CreatePlatformCommand platform)
+        public async Task<ActionResult<CreateResponse<CreatePlatformCommandDto>>> Post(CreatePlatformCommand platform)
         {
             var response = await _mediator.Send(platform);
 
             //TODO: I think I need to map to a read dto first, and then return that here....
             if (response.Success)
-                return CreatedAtRoute("GetPlatformById", new { PromptPlatformId = response.Data.PromptPlatformId }, response.Data);
+                return CreatedAtRoute("GetPlatformById", new { PromptPlatformId = response.Data.PromptPlatformId }, response);
             else
                 return BadRequest($"Failed to save new Platform - {string.Join(", ", response.ValidationErrors)}");
         }

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using CleanCommander.Application.Contracts.Persistence;
+using CleanCommander.Application.Responses;
 using CleanCommander.Domain.Entities;
 using MediatR;
 using Microsoft.Extensions.Logging;
@@ -12,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace CleanCommander.Application.Features.Command.Commands.CreateCommand
 {
-    public class CreateCommandLineCommandHandler : IRequestHandler<CreateCommandLineCommand, CreateCommandLineCommandResponse>
+    public class CreateCommandLineCommandHandler : IRequestHandler<CreateCommandLineCommand, CreateResponse<CreateCommandLineDto>>
     {
         private readonly IMapper _mapper;
         private readonly ICommandRepository _repo;
@@ -24,9 +25,9 @@ namespace CleanCommander.Application.Features.Command.Commands.CreateCommand
             _repo = repo;
             _logger = logger;
         }
-        public async Task<CreateCommandLineCommandResponse> Handle(CreateCommandLineCommand request, CancellationToken cancellationToken)
+        public async Task<CreateResponse<CreateCommandLineDto>> Handle(CreateCommandLineCommand request, CancellationToken cancellationToken)
         {
-            var response = new CreateCommandLineCommandResponse();
+            var response = new CreateResponse<CreateCommandLineDto>();
             var validator = new CreateCommandLineCommandValidator();
 
             //Check the request to see if any of the validation rules, set up for the CreateCommandLineCommand class inside the CreateEventCommandValidator, are broken.
@@ -51,7 +52,7 @@ namespace CleanCommander.Application.Features.Command.Commands.CreateCommand
                 _repo.Add(commandLine);
 
                 //Map from the CommandLine Entity to a CreateCommandLineDto, which is added to the response return model.
-                response.CommandLineDto = _mapper.Map<CreateCommandLineDto>(commandLine);
+                response.Data = _mapper.Map<CreateCommandLineDto>(commandLine);
             }
             return response;
         }
