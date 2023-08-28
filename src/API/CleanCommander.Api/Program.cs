@@ -3,6 +3,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Serilog;
+using Serilog.Events;
+using Serilog.Formatting.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,9 +21,18 @@ namespace CleanCommander.Api
                 .Build();
 
             Log.Logger = new LoggerConfiguration()
-                .ReadFrom.Configuration(config)
+                .MinimumLevel.Information()
+                .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
+                .MinimumLevel.Override("Microsoft.Hosting.Lifetime", LogEventLevel.Information)
                 .WriteTo.File(@"C:\Logs\log-.txt", rollingInterval: RollingInterval.Day)
+                //.WriteTo.Console()
                 .CreateLogger();
+
+            //Log.Logger = new LoggerConfiguration()
+            //    .ReadFrom.Configuration(config)
+            //    .WriteTo.File(@"C:\Logs\log-.txt", restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Information, rollingInterval: RollingInterval.Day)
+            //    .CreateLogger();
+
             CreateHostBuilder(args).Build().Run();
         }
 

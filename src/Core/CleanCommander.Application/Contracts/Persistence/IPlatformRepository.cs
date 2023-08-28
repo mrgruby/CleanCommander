@@ -12,5 +12,7 @@ namespace CleanCommander.Application.Contracts.Persistence
         Task<IEnumerable<PromptPlatform>> GetPlatformsWithCommands();
 
         Task<PromptPlatform> GetPlatformByIdWithCommands(Guid id);
+
+        Task<IEnumerable<PlatformImage>> GetPlatformImages();
     }
 }

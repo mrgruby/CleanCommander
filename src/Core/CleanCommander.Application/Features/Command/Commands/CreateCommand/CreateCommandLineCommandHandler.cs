@@ -42,6 +42,7 @@ namespace CleanCommander.Application.Features.Command.Commands.CreateCommand
                 {
                     response.ValidationErrors.Add(error.ErrorMessage);
                 }
+
             }
             if (response.Success)
             {

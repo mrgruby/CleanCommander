@@ -13,5 +13,6 @@ namespace CleanCommander.Domain.Entities
         public string PromptPlatformDescription { get; set; }
         public string PromptPlatformImageUrl { get; set; }
         public virtual ICollection<CommandLine> CommandLineList { get; set; }
+        public PlatformImage PlatformImage { get; set; }
     }
 }

@@ -40,7 +40,7 @@ namespace CleanCommander.Api.Controllers
         //api/platform/{platformId}/command
         //https://localhost:44363/api/platform/6313179F-7837-473A-A4D5-A5571B43E6A6/command/
         [HttpGet(Name = "GetCommandsLinesByPlatform")]
-        public async Task<ActionResult<List<GetCommandLineListByPlatformReturnModel>>> Get(Guid platformId)
+        public async Task<ActionResult<GetResponse<List<GetCommandLineListByPlatformReturnModel>>>> Get(Guid platformId)
         {
             var getCommandLineListByPlatformReturnModel = await _mediator.Send(new GetCommandLineListByPlatformQuery { PlatformId = platformId });
             return Ok(getCommandLineListByPlatformReturnModel);
@@ -133,11 +133,11 @@ namespace CleanCommander.Api.Controllers
         public async Task<ActionResult<DeleteCommandLineCommandResponse>>Delete(Guid platformId, Guid commandLineId)
         {
             var response = await _mediator.Send(new DeleteCommandCommand { PromptPlatformId = platformId, CommandLineId = commandLineId });
-
+            //throw new HttpResponseException(HttpStatusCode.NotFound);
             if (response.Success == false && response.Message == "NotFound")
                 return NotFound($"CommandLine to delete, with Id {commandLineId}, was not found!");           
 
-            return NoContent();
+            return response;
         }
     }
 }
