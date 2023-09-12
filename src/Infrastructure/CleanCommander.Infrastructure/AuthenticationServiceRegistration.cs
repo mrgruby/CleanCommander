@@ -47,5 +47,32 @@ namespace CleanCommander.Infrastructure.Identity
 
             return services;
         }
+
+        /// <summary>
+        /// This is used in the SQL Server docker container, which is created in docker-compose.
+        /// Everytime a new SQL Server docker container is created, we need to run EF migrations.
+        /// </summary>
+        /// <param name="services"></param>
+        /// <param name="configuration"></param>
+        public static void RunAuthenticationMigrations(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.AddDbContext<AuthenticationDbContext>(options =>
+                options.UseSqlServer(configuration["ConnectionStrings:CleanCommanderConnectionString"]));
+
+            using var serviceProvider = services.BuildServiceProvider();
+            using var dbContext = serviceProvider.GetRequiredService<AuthenticationDbContext>();
+
+            try
+            {
+                dbContext.Database.Migrate();
+                Console.WriteLine($"Migrations applied perfectly!");
+            }
+            catch (Exception ex)
+            {
+                // Handle migration errors
+                Console.WriteLine($"Error applying migrations: {ex.Message}");
+                throw;
+            }
+        }
     }
 }

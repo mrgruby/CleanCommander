@@ -34,7 +34,7 @@ namespace CleanCommander.Application.Features.Command.Commands.CreateCommand
             //If so, add the error message to the ValidationErrors list in the validationResult.
             var validationResult = await validator.ValidateAsync(request.CommandLineModel);
 
-            if (validationResult.Errors.Count > 0)
+            if (!validationResult.IsValid)
             {
                 response.Success = false;
                 response.ValidationErrors = new List<string>();

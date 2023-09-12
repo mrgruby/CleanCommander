@@ -30,9 +30,6 @@ namespace CleanCommander.Persistence
             services.AddDbContext<CleanCommanderDbContext>(options => options.UseSqlServer(conn));
 
             //services.AddDbContext<CleanCommanderDbContext>(options =>
-            //    options.UseSqlServer(configuration["ConnectionStrings:CleanCommanderConnectionString"]));
-
-            //services.AddDbContext<CleanCommanderDbContext>(options =>
             //    options.UseSqlServer(configuration.GetConnectionString("CleanCommanderConnectionString")));
 
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
@@ -43,6 +40,12 @@ namespace CleanCommander.Persistence
             return services;
         }
 
+        /// <summary>
+        /// This is used in the SQL Server docker container, which is created in docker-compose.
+        /// Everytime a new SQL Server docker container is created, we need to run EF migrations.
+        /// </summary>
+        /// <param name="services"></param>
+        /// <param name="configuration"></param>
         public static void RunMigrations(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<CleanCommanderDbContext>(options =>

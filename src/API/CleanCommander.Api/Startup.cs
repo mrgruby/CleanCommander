@@ -48,7 +48,10 @@ namespace CleanCommander.Api
                        .AllowAnyMethod();
                 });
             });
-            services.RunMigrations(configuration);
+
+
+            //services.RunMigrations(configuration);
+            //services.RunAuthenticationMigrations(configuration);
 
         }
 

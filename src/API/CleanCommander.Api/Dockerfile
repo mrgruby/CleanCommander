@@ -5,6 +5,8 @@ WORKDIR /app
 EXPOSE 80
 EXPOSE 443
 
+#When running the container, this connString is used in Startup.cs. The placeholder for Password (ENVPW), is replaced with the value from an
+#environment variable named DB_PW, which is defined in the docker-compose file. The value comes from the .env file.
 ENV ConnectionStrings:CleanCommanderConnectionString="Server=ms-sql-server;Database=CleanCommanderDb;User=sa;Password=ENVPW;integrated security=false"
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
