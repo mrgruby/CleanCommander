@@ -33,10 +33,10 @@ namespace CleanCommander.Api
             //    .WriteTo.File(@"C:\Logs\log-.txt", restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Information, rollingInterval: RollingInterval.Day)
             //    .CreateLogger();
 
-            CreateHostBuilder(args).Build().Run();
+            CreateWebHostBuilder(args).Build().Run();
         }
 
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
+        public static IHostBuilder CreateWebHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
             .UseSerilog()//This configures Serilog as the default logging provider.
                 .ConfigureWebHostDefaults(webBuilder =>

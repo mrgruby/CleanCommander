@@ -8,7 +8,7 @@ namespace CleanCommander.Domain.Entities
 {
     public class PlatformImage
     {
-        public string ImageId { get; set; }
+        public Guid ImageId { get; set; }
         public string ImageName { get; set; }
         public string ImageData { get; set; }
         public string ImageCategory { get; set; }

@@ -1,9 +1,13 @@
 ﻿using CleanCommander.Application.Contracts.Persistence;
 using CleanCommander.Persistence;
 using CleanCommander.Persistence.Repositories;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.Text;
 
 namespace CleanCommander.Persistence
 {
@@ -19,15 +23,44 @@ namespace CleanCommander.Persistence
     {
         public static IServiceCollection AddPersistenceServices(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<CleanCommanderDbContext>(options =>
-                options.UseSqlServer(configuration.GetConnectionString("CleanCommanderConnectionString")));
+            var config = new StringBuilder (configuration["ConnectionStrings:CleanCommanderConnectionString"]);
+            string conn = config.Replace("ENVPW", configuration["DB_PW"])
+                                .ToString();
+
+            services.AddDbContext<CleanCommanderDbContext>(options => options.UseSqlServer(conn));
+
+            //services.AddDbContext<CleanCommanderDbContext>(options =>
+            //    options.UseSqlServer(configuration["ConnectionStrings:CleanCommanderConnectionString"]));
+
+            //services.AddDbContext<CleanCommanderDbContext>(options =>
+            //    options.UseSqlServer(configuration.GetConnectionString("CleanCommanderConnectionString")));
 
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 
             services.AddScoped<IPlatformRepository, PlatformRepository>();
             services.AddScoped<ICommandRepository, CommandRepository>();
 
-            return services;    
+            return services;
+        }
+
+        public static void RunMigrations(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.AddDbContext<CleanCommanderDbContext>(options =>
+                options.UseSqlServer(configuration["ConnectionStrings:CleanCommanderConnectionString"]));
+
+            using var serviceProvider = services.BuildServiceProvider();
+            using var dbContext = serviceProvider.GetRequiredService<CleanCommanderDbContext>();
+
+            try
+            {
+                dbContext.Database.Migrate();
+            }
+            catch (Exception ex)
+            {
+                // Handle migration errors
+                Console.WriteLine($"Error applying migrations: {ex.Message}");
+                throw;
+            }
         }
     }
 }

@@ -1,5 +1,7 @@
 ﻿using CleanCommander.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Storage;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +19,7 @@ namespace CleanCommander.Persistence
 
         public DbSet<CommandLine> CommandLines { get; set; }
         public DbSet<PromptPlatform> PromptPlatforms { get; set; }
-        public DbSet<PlatformImage> PlatformImages { get; set; }
+        //public DbSet<PlatformImage> PlatformImages { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

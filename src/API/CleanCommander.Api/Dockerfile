@@ -5,6 +5,8 @@ WORKDIR /app
 EXPOSE 80
 EXPOSE 443
 
+ENV ConnectionStrings:CleanCommanderConnectionString="Server=ms-sql-server;Database=CleanCommanderDb;User=sa;Password=ENVPW;integrated security=false"
+
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /app
 COPY ["src/API/CleanCommander.Api/CleanCommander.Api.csproj", "app/API/CleanCommander.Api/"]

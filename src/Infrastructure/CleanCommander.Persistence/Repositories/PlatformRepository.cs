@@ -26,9 +26,9 @@ namespace CleanCommander.Persistence.Repositories
             return await _dbContext.PromptPlatforms.Where(p => p.PromptPlatformId == id).Include(x => x.CommandLineList).FirstOrDefaultAsync();
         }
 
-        public async Task<IEnumerable<PlatformImage>> GetPlatformImages()
-        {
-            return await _dbContext.PlatformImages.ToListAsync();
-        }
+        //public async Task<IEnumerable<PlatformImage>> GetPlatformImages()
+        //{
+        //    return await _dbContext.PlatformImages.ToListAsync();
+        //}
     }
 }

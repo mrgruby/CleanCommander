@@ -31,7 +31,6 @@ namespace CleanCommander.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddApplicationServices();
-            //services.AddInfrastructureServices(configuration);
             services.AddPersistenceServices(configuration);
             services.AddAuthenticationServices(configuration);
             services.AddControllers().AddNewtonsoftJson(options => 
@@ -49,6 +48,7 @@ namespace CleanCommander.Api
                        .AllowAnyMethod();
                 });
             });
+            services.RunMigrations(configuration);
 
         }
 
