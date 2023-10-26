@@ -454,3 +454,4 @@ $RECYCLE.BIN/
 !.vscode/extensions.json
 *.env
 /src/Infrastructure/CleanCommander.Infrastructure/Services/data.txt
+/src/API/CleanCommander.Api/appsettings.json
